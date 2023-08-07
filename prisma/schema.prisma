@@ -36,3 +36,140 @@ model Note {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String
 }
+
+model Dados_pessoais {
+  nome_completo String
+  email String @userId
+  senha String
+  data_de_aniversario data 
+  cpf String
+}
+
+model Logar {
+  email String @userId
+  senha String
+  esqueci_senha String
+}
+
+model Numero_ob {
+  inserir_num_ordem String
+}
+
+model Cartao_credito {
+  nome_titular String
+  numero_do_cartao String
+  vencimento String
+  cod_seguranca String  
+  recorrencia String
+}
+
+model Att_processos {
+  conteudo String
+  data data
+  cliente String
+}
+
+model Task {
+  novas String
+}
+
+model Agenda {
+  eventos_prox String
+}
+
+model Inserir {
+  titulo String
+  descricao String
+  vencimento String
+  atribuicao String 
+  concluida String
+  prioridade [nivel_prioridade]
+}
+
+model Nivel_prioridade {
+  alta String
+  media String
+  baixa String
+}
+
+model Filtro {
+  concluidas String
+  prioridade String
+  atribuicao String
+  vencimento [] 
+}
+
+model Filtro_vencimento {
+  data String
+  vencimento String
+}
+
+model Ordenar{
+  vencimento []
+  prioridade []
+}
+
+model Notificacoes {
+  numero_processo []
+  conteudo_notificacao []
+  cliente String
+  data data 
+  horario String
+  historico String
+}
+
+model Inserir_agenda{
+  titulo String
+  data data
+  horario String
+  descricao String
+  local String
+}
+
+model Periodos_agenda {
+  hoje data
+  semana data
+  mes data
+} 
+
+model Filtrar_agenda {
+  periodos [periodos_agenda]
+  nome_cliente []
+  filtro_textual []
+}
+
+model Dados_pessoa_fisica {
+  nome_completo String
+  rg String
+  nascimento String 
+  nacionalidade String
+  estado_civil String
+  contato String
+  endereco String
+  email String
+  profissao String
+  nome_da_mae String
+  nome_do_pai String
+}
+
+model Dados_pj {
+  razao_social Image
+  contato String
+  endereco String
+  email String
+  responsavel_legal String
+}
+
+model Cadatrar_receita {
+  cliente String
+  valor  String
+  data data
+  discricao String
+}
+
+model Cadatrar_despesa {
+  cliente String
+  valor String
+  data data
+  discricao String
+}
