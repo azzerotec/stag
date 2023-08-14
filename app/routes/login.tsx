@@ -37,7 +37,7 @@ export default function Login() {
         </Linha>
         <text className=" mt-4 text-a606771">
           Não tem uma conta?
-          <Link to="/join" className="text-a8B919A">
+          <Link to="/register" className="ml-1 text-a8B919A">
             Criar conta
           </Link>
         </text>
