@@ -1,5 +1,7 @@
 import { json, type LoaderArgs } from "@remix-run/node";
 import { Link } from "@remix-run/react";
+import { useState } from "react";
+import { CodeConfirmationModal } from "~/components/CodeConfirmationModal";
 import { TextInput } from "~/components/TextInput";
 import { Coluna, Linha } from "~/components/auxiliares";
 import { LogoStag } from "~/components/image/icons/LogoStag";
@@ -11,6 +13,8 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 
 export default function Login() {
+  const [open, setOpen] = useState(false);
+
   return (
     <Linha>
       <Coluna></Coluna>
@@ -31,9 +35,14 @@ export default function Login() {
               Lembrar-me
             </label>
           </div>
-          <a className="text-sm font-medium text-a8B919A">
+          <button
+            className="text-sm font-medium text-a8B919A"
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
             Esqueceu sua senha?
-          </a>
+          </button>
         </Linha>
         <text className=" mt-4 text-a606771">
           Não tem uma conta?
@@ -42,6 +51,7 @@ export default function Login() {
           </Link>
         </text>
       </Coluna>
+      <CodeConfirmationModal open={open} setOpen={setOpen} />
     </Linha>
   );
 }
