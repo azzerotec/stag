@@ -70,8 +70,6 @@ export default function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  console.log(actionData);
-
   useEffect(() => {
     if (actionData?.errors?.email) {
       emailRef.current?.focus();

@@ -66,6 +66,10 @@ export function useUser(): User {
   return maybeUser;
 }
 
+export function validateText(text: unknown): text is string {
+  return typeof text === "string" && text.length > 3;
+}
+
 export function validateEmail(email: unknown): email is string {
-  return typeof email === "string" && email.length > 3 && email.includes("@");
+  return validateText(email) && email.includes("@");
 }

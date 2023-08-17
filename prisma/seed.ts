@@ -4,6 +4,8 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function seed() {
+  const oab = "12345";
+  const name = "Rachel";
   const email = "rachel@remix.run";
 
   // cleanup the existing database
@@ -15,6 +17,8 @@ async function seed() {
 
   await prisma.user.create({
     data: {
+      oab,
+      name,
       email,
       password: {
         create: {
