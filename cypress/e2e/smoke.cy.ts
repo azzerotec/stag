@@ -7,6 +7,8 @@ describe("smoke tests", () => {
 
   it("should allow you to register and login", () => {
     const loginForm = {
+      oab: faker.string.numeric({ length: 10 }),
+      name: faker.person.fullName(),
       email: `${faker.internet.userName()}@example.com`,
       password: faker.internet.password(),
     };
@@ -15,13 +17,15 @@ describe("smoke tests", () => {
 
     cy.visitAndCheck("/");
 
-    cy.findByRole("link", { name: /sign up/i }).click();
+    cy.findByRole("link", { name: /Criar conta/i }).click();
 
-    cy.findByRole("textbox", { name: /email/i }).type(loginForm.email);
-    cy.findByLabelText(/password/i).type(loginForm.password);
-    cy.findByRole("button", { name: /create account/i }).click();
+    cy.findByRole("textbox", { name: /Nome completo/i }).type(loginForm.name);
+    cy.findByRole("textbox", { name: /Oab/i }).type(loginForm.oab);
+    cy.findByRole("textbox", { name: /E-mail/i }).type(loginForm.email);
+    cy.findByLabelText(/Senha/i).type(loginForm.password);
+    cy.findByRole("button", { name: /Criar conta/i }).click();
 
-    cy.findByRole("button", { name: /logout/i }).click();
-    cy.findByRole("link", { name: /log in/i });
+    cy.findByRole("link", { name: /logout/i }).click();
+    cy.findByRole("button", { name: /Entrar/i });
   });
 });

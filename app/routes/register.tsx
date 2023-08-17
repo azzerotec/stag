@@ -151,7 +151,7 @@ export default function Register() {
             required
             autoFocus={true}
             name="name"
-            type="name"
+            type="text"
             autoComplete="name"
             aria-invalid={actionData?.errors?.name ? true : undefined}
             aria-describedby="name-error"
@@ -163,7 +163,7 @@ export default function Register() {
             required
             autoFocus={true}
             name="oab"
-            type="oab"
+            type="text"
             autoComplete="oab"
             aria-invalid={actionData?.errors?.oab ? true : undefined}
             aria-describedby="oab-error"
