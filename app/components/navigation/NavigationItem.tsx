@@ -1,4 +1,4 @@
-import { Link, NavLink } from "@remix-run/react";
+import { NavLink } from "@remix-run/react";
 
 export type NavigationItem = {
   name: string;

@@ -1,9 +1,6 @@
 import { Link } from "@remix-run/react";
 import { NavigationItem } from "./NavigationItem";
-import {
-  ArrowLeftOnRectangleIcon,
-  Cog6ToothIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline";
 
 type Props = {
   navigation: NavigationItem[];
@@ -19,9 +16,9 @@ export const DesktopSidebar = ({ navigation }: Props) => (
       />
     </div>
     <nav className="flex flex-1 flex-col">
-      <ul role="list" className="flex flex-1 flex-col gap-y-7">
+      <ul className="flex flex-1 flex-col gap-y-7">
         <li>
-          <ul role="list" className="-mx-2 space-y-1">
+          <ul className="-mx-2 space-y-1">
             {navigation.map((item) => (
               <NavigationItem key={item.href} {...item} />
             ))}
