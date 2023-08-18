@@ -4,11 +4,11 @@ import { Coluna } from "./auxiliares";
 export const ForgotPasswordSuccess = ({
   open,
   setOpen,
-  closeModal,
+  onConfirmation,
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
-  closeModal: () => void;
+  onConfirmation: () => void;
 }) => {
   return (
     <Modal open={open} setOpen={setOpen}>
@@ -22,7 +22,7 @@ export const ForgotPasswordSuccess = ({
         </h2>
         <button
           className="mt-6 w-96 rounded-md bg-a606875 py-2 font-medium text-white"
-          onClick={closeModal}
+          onClick={onConfirmation}
         >
           Concluir
         </button>
