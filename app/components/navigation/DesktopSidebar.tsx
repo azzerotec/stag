@@ -1,6 +1,5 @@
 import { Link } from "@remix-run/react";
 import { NavigationItem } from "./NavigationItem";
-import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline";
 
 type Props = {
   navigation: NavigationItem[];
@@ -39,8 +38,7 @@ export const DesktopSidebar = ({ navigation }: Props) => (
               <span aria-hidden="true">Tom Cook</span>
             </Link>
             <Link to="logout" className="rounded-md p-2 hover:bg-gray-800">
-              <span className="sr-only">logout</span>
-              <ArrowLeftOnRectangleIcon className="h-6 w-6 shrink-0" />
+              <span>logout</span>
             </Link>
           </div>
         </li>
