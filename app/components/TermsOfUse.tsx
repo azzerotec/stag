@@ -1,14 +1,15 @@
 import { Modal } from "./modal";
 import { Coluna } from "./auxiliares";
 
+const terms =
+  "Lorem ipsum dolor sit amet consectetur. Quam quis vulputate in semper tellus accumsan. Consectetur faucibus sed massa ut at. Tincidunt velit elit quis accumsan fermentum libero nisl tincidunt amet. Ut orci ac sit consectetur. Ut diam eu porttitor lacinia amet aenean. Duis aliquam viverra blandit urna amet. Lectus viverra suspendisse et tristique pulvinar nunc fringilla faucibus tincidunt. Morbi dui a dignissim magnis feugiat enim. Viverra nullam elit in magna morbi. In ac scelerisque id id lacinia eget. Facilisis fringilla tellus platea sed nunc. Id turpis egestas elementum sapien scelerisque tellus viverra amet sed. Pellentesque in lacus etiam bibendum etiam lorem eget nunc. Eget nunc pellentesque metus quam pellentesque sed ultricies. Adipiscing aenean purus metus felis ut gravida. Donec arcu iaculis neque sed dui lacinia purus imperdiet. Eu ipsum in id velit erat viverra ut. Habitasse varius volutpat rhoncus sit convallis orci. Ornare orci urna donec maecenas at. Egestas aenean sagittis imperdiet feugiat. Feugiat integer nisi leo risus sodales vel. Diam commodo nibh pretium aenean. Vestibulum curabitur dictumst aliquam tellus rutrum tincidunt eget egestas. Id orci aliquet tellus elit massa diam nam non adipiscing. Quis volutpat in diam lobortis cras. Sit augue risus et neque amet. In consequat magna dignissim tellus at. Laoreet donec duis et donec. Ullamcorper eget integer eget tellus condimentum leo diam praesent. Dictumst vivamus sem quis ipsum ut metus porttitor non. Vestibulum viverra sed diam quam. Ac augue arcu sapien sit. Viverra sit etiam a venenatis mauris nullam gravida tristique diam. Arcu urna at risus vulputate sed. Magna massa curabitur elit faucibus sem.";
+
 export const TermsOfUse = ({
   open,
   setOpen,
-  onConfirmation,
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
-  onConfirmation: () => void;
 }) => {
   return (
     <Modal open={open} setOpen={setOpen}>
@@ -16,27 +17,7 @@ export const TermsOfUse = ({
         <h1 className="font-montserrat text-3xl font-semibold text-a424A57">
           Termos e condições de uso
         </h1>
-        <h2 className="mt-6 font-montserrat text-sm font-medium text-a606771">
-          Enviamos um email com o link para fazer a mudança de senha da sua
-          conta!
-        </h2>
-        <div>
-          <input
-            id="toAgreeTerms"
-            name="toAgreeTerms"
-            type="checkbox"
-            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-          />
-          <label htmlFor="toAgreeTerms" className="ml-2 text-sm">
-            Eu li e concordo com os termos e condições de uso.
-          </label>
-        </div>
-        <button
-          className="mt-6 w-96 rounded-md bg-a606875 py-2 font-medium text-white"
-          onClick={onConfirmation}
-        >
-          Prosseguir
-        </button>
+        <textarea value={terms} className="h-96 w-full" disabled />
       </Coluna>
     </Modal>
   );
