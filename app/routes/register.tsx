@@ -1,7 +1,8 @@
 import { json, redirect } from "@remix-run/node";
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { TermsOfUse } from "~/components/TermsOfUse";
 import { TextInput } from "~/components/TextInput";
 import { Coluna, Linha } from "~/components/auxiliares";
 import { LogoStag } from "~/components/image/icons/LogoStag";
@@ -127,6 +128,8 @@ export default function Register() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  const [termsModalOpen, setTermsModalOpen] = useState(false);
+
   useEffect(() => {
     if (actionData?.errors?.email) {
       emailRef.current?.focus();
@@ -207,6 +210,18 @@ export default function Register() {
           >
             Criar conta
           </button>
+
+          <span className=" mt-4 text-center text-a606771">
+            Clicando em "Criar conta" você declara
+            <br /> que está ciente e concorda com nossos{" "}
+            <button
+              className="text-sky-600 underline"
+              onClick={() => setTermsModalOpen(true)}
+            >
+              termos
+            </button>
+          </span>
+
           <span className=" mt-28 text-a606771">
             Já tem uma conta?
             <Link
@@ -221,6 +236,7 @@ export default function Register() {
           </span>
         </Coluna>
       </Form>
+      <TermsOfUse open={termsModalOpen} setOpen={setTermsModalOpen} />
     </Linha>
   );
 }

@@ -152,7 +152,7 @@ export default function Login() {
           </Linha>
         </Form>
 
-        <text className=" mt-4 text-a606771">
+        <span className=" mt-4 text-a606771">
           Não tem uma conta?
           <Link
             to={{
@@ -163,7 +163,7 @@ export default function Login() {
           >
             Criar conta
           </Link>
-        </text>
+        </span>
       </Coluna>
       <CodeConfirmationModal
         open={open}
