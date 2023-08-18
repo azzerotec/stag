@@ -2,10 +2,11 @@ import { json, redirect } from "@remix-run/node";
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
+import { BackgroundImage } from "~/components/BackgroundImage";
 import { TermsOfUse } from "~/components/TermsOfUse";
 import { TextInput } from "~/components/TextInput";
 import { Coluna, Linha } from "~/components/auxiliares";
-import { LogoStag } from "~/components/image/icons/LogoStag";
+import { LogoStag } from "~/images/icons/LogoStag";
 import { createUser, getUserByEmail } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail, validateText } from "~/utils";
@@ -139,14 +140,14 @@ export default function Register() {
   }, [actionData]);
 
   return (
-    <Linha>
-      <Form method="post">
-        <Coluna></Coluna>
-        <Coluna className="items-center px-36 py-56 align-middle font-inter">
-          <LogoStag />
-          <h2 className="mb-14 font-montserrat text-2xl font-semibold text-a374151">
-            Hora de criar uma conta!
-          </h2>
+    <Linha className="h-full grow">
+      <BackgroundImage />
+      <Coluna className="items-center justify-center p-32 align-middle font-inter">
+        <LogoStag />
+        <h2 className="mb-14 font-montserrat text-2xl font-semibold text-a374151">
+          Hora de criar uma conta!
+        </h2>
+        <Form method="post">
           <TextInput
             label="Nome completo"
             ref={nameRef}
@@ -210,32 +211,32 @@ export default function Register() {
           >
             Criar conta
           </button>
+        </Form>
 
-          <span className=" mt-4 text-center text-a606771">
-            Clicando em "Criar conta" você declara
-            <br /> que está ciente e concorda com nossos{" "}
-            <button
-              className="text-sky-600 underline"
-              onClick={() => setTermsModalOpen(true)}
-            >
-              termos
-            </button>
-          </span>
+        <div className=" mt-4 text-center text-a606771">
+          Clicando em "Criar conta" você declara
+          <br /> que está ciente e concorda com nossos{" "}
+          <button
+            className="text-sky-600 underline"
+            onClick={() => setTermsModalOpen(true)}
+          >
+            termos
+          </button>
+        </div>
 
-          <span className=" mt-28 text-a606771">
-            Já tem uma conta?
-            <Link
-              to={{
-                pathname: "/login",
-                search: searchParams.toString(),
-              }}
-              className="ml-1 text-a404347"
-            >
-              Login
-            </Link>
-          </span>
-        </Coluna>
-      </Form>
+        <div className="mt-14 text-a606771">
+          Já tem uma conta?
+          <Link
+            to={{
+              pathname: "/login",
+              search: searchParams.toString(),
+            }}
+            className="ml-1 text-a404347"
+          >
+            Login
+          </Link>
+        </div>
+      </Coluna>
       <TermsOfUse open={termsModalOpen} setOpen={setTermsModalOpen} />
     </Linha>
   );

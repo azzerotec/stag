@@ -2,11 +2,12 @@ import { json, redirect } from "@remix-run/node";
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
+import { BackgroundImage } from "~/components/BackgroundImage";
 import { CodeConfirmationModal } from "~/components/CodeConfirmationModal";
 import { ForgotPasswordSuccess } from "~/components/ForgotPasswordSuccess";
 import { TextInput } from "~/components/TextInput";
 import { Coluna, Linha } from "~/components/auxiliares";
-import { LogoStag } from "~/components/image/icons/LogoStag";
+import { LogoStag } from "~/images/icons/LogoStag";
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils";
@@ -81,8 +82,8 @@ export default function Login() {
   }, [actionData]);
 
   return (
-    <Linha>
-      <Coluna></Coluna>
+    <Linha className="h-full">
+      <BackgroundImage />
       <Coluna className="items-center px-36 py-56 align-middle font-inter">
         <LogoStag />
         <h2 className="mb-4 font-montserrat text-2xl font-semibold text-a374151">
@@ -152,7 +153,7 @@ export default function Login() {
           </Linha>
         </Form>
 
-        <span className=" mt-4 text-a606771">
+        <span className="mt-14 text-a606771">
           Não tem uma conta?
           <Link
             to={{
