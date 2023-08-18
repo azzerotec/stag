@@ -176,7 +176,7 @@ export default function Login() {
       <ForgotPasswordSuccess
         open={forgotPasswordSuccess}
         setOpen={setForgotPasswordSuccess}
-        closeModal={() => {
+        onConfirmation={() => {
           setForgotPasswordSuccess(false);
         }}
       />
