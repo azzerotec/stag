@@ -5,9 +5,11 @@ import { InputNumber } from "./InputNumber";
 export const CodeConfirmationModal = ({
   open,
   setOpen,
+  onConfirmation,
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
+  onConfirmation: () => void;
 }) => {
   return (
     <Modal open={open} setOpen={setOpen}>
@@ -20,7 +22,10 @@ export const CodeConfirmationModal = ({
           <b className="text-a111827">fulano@gmail.com</b>
         </h2>
         <InputNumber />
-        <button className="mt-6 w-80 rounded-md bg-a606875 py-2 font-medium text-white">
+        <button
+          onClick={onConfirmation}
+          className="mt-6 w-80 rounded-md bg-a606875 py-2 font-medium text-white"
+        >
           Entrar
         </button>
       </Coluna>

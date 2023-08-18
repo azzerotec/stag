@@ -3,6 +3,7 @@ import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 import { CodeConfirmationModal } from "~/components/CodeConfirmationModal";
+import { ForgotPasswordSuccess } from "~/components/ForgotPasswordSuccess";
 import { TextInput } from "~/components/TextInput";
 import { Coluna, Linha } from "~/components/auxiliares";
 import { LogoStag } from "~/components/image/icons/LogoStag";
@@ -63,6 +64,7 @@ export const action = async ({ request }: ActionArgs) => {
 
 export default function Login() {
   const [open, setOpen] = useState(false);
+  const [forgotPasswordSuccess, setForgotPasswordSuccess] = useState(false);
 
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") || "/";
@@ -163,7 +165,21 @@ export default function Login() {
           </Link>
         </text>
       </Coluna>
-      <CodeConfirmationModal open={open} setOpen={setOpen} />
+      <CodeConfirmationModal
+        open={open}
+        setOpen={setOpen}
+        onConfirmation={() => {
+          setOpen(false);
+          setForgotPasswordSuccess(true);
+        }}
+      />
+      <ForgotPasswordSuccess
+        open={forgotPasswordSuccess}
+        setOpen={setForgotPasswordSuccess}
+        onConfirmation={() => {
+          setForgotPasswordSuccess(false);
+        }}
+      />
     </Linha>
   );
 }
