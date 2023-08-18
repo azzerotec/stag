@@ -2,7 +2,7 @@ import { NavLink } from "@remix-run/react";
 
 export type NavigationItem = {
   name: string;
-  icon: any;
+  icon?: any;
   href: string;
   count?: number;
 };
@@ -33,7 +33,7 @@ export const NavigationItem = ({
   return (
     <li>
       <NavLink to={href} className={({ isActive }) => itemStyle(isActive)}>
-        <Icon className="h-6 w-6 shrink-0" aria-hidden="true" />
+        {Icon ? <Icon className="h-6 w-6 shrink-0" aria-hidden="true" /> : null}
         {name}
         {count ? <Count count={count} /> : null}
       </NavLink>
