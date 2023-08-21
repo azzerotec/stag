@@ -4,6 +4,7 @@ import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 import { TermsOfUse } from "~/components/TermsOfUse";
 import { TextInput } from "~/components/TextInput";
+import { LogoStag } from "~/images/icons/LogoStag";
 import { createUser, getUserByEmail } from "~/models/user.server";
 import { createUserSession } from "~/session.server";
 import { safeRedirect, validateEmail, validateText } from "~/utils";
@@ -132,6 +133,8 @@ export default function Register() {
 
   return (
     <>
+      <LogoStag />
+
       <h2 className="mb-14 font-montserrat text-2xl font-semibold text-a374151">
         Hora de criar uma conta!
       </h2>

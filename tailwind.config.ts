@@ -18,6 +18,7 @@ export default {
         a7B7B7B: "#7B7B7B",
         a424A57: "#424A57",
         a454D58: "#454D58",
+        aDDDEE0: "#DDDEE0",
       },
     },
   },
