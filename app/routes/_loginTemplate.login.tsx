@@ -6,6 +6,7 @@ import { CodeConfirmationModal } from "~/components/CodeConfirmationModal";
 import { ForgotPasswordSuccess } from "~/components/ForgotPasswordSuccess";
 import { TextInput } from "~/components/TextInput";
 import { Linha } from "~/components/auxiliares";
+import { LogoStag } from "~/images/icons/LogoStag";
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils";
@@ -75,6 +76,8 @@ export default function Login() {
 
   return (
     <>
+      <LogoStag />
+
       <h2 className="mb-4 font-montserrat text-2xl font-semibold text-a374151">
         Entre na sua conta
       </h2>
