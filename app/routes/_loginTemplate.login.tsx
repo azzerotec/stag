@@ -1,9 +1,7 @@
 import { json } from "@remix-run/node";
 import type { ActionArgs } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
-import { useEffect, useRef, useState } from "react";
-import { CodeConfirmationModal } from "~/components/CodeConfirmationModal";
-import { ForgotPasswordSuccess } from "~/components/ForgotPasswordSuccess";
+import { useEffect, useRef } from "react";
 import { TextInput } from "~/components/TextInput";
 import { Linha } from "~/components/auxiliares";
 import { LogoStag } from "~/images/icons/LogoStag";
@@ -57,9 +55,6 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export default function Login() {
-  const [open, setOpen] = useState(false);
-  const [forgotPasswordSuccess, setForgotPasswordSuccess] = useState(false);
-
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") || "/";
   const actionData = useActionData<typeof action>();
@@ -134,14 +129,16 @@ export default function Login() {
               Lembrar-me
             </label>
           </div>
-          <button
-            className="text-sm font-medium text-a8B919A"
-            onClick={() => {
-              setOpen(true);
+          <Link
+            to={{
+              pathname: "/password-recovery",
+              search:
+                emailRef.current?.value && "email=" + emailRef.current?.value,
             }}
+            className="text-sm font-medium text-a8B919A"
           >
             Esqueceu sua senha?
-          </button>
+          </Link>
         </Linha>
       </Form>
 
@@ -157,21 +154,6 @@ export default function Login() {
           Criar conta
         </Link>
       </span>
-      <CodeConfirmationModal
-        open={open}
-        setOpen={setOpen}
-        onConfirmation={() => {
-          setOpen(false);
-          setForgotPasswordSuccess(true);
-        }}
-      />
-      <ForgotPasswordSuccess
-        open={forgotPasswordSuccess}
-        setOpen={setForgotPasswordSuccess}
-        onConfirmation={() => {
-          setForgotPasswordSuccess(false);
-        }}
-      />
     </>
   );
 }
