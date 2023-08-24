@@ -142,7 +142,7 @@ export default function Login() {
         </Linha>
       </Form>
 
-      <span className="mt-14 text-a606771">
+      <Linha className="mt-14 text-a606771">
         Não tem uma conta?
         <Link
           to={{
@@ -153,7 +153,7 @@ export default function Login() {
         >
           Criar conta
         </Link>
-      </span>
+      </Linha>
     </>
   );
 }
