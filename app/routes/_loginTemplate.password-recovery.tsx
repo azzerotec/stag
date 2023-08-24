@@ -1,10 +1,14 @@
 import { json, redirect } from "@remix-run/node";
 import type { ActionArgs } from "@remix-run/node";
-import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
-import { useRef, useState } from "react";
+import {
+  Form,
+  Link,
+  Outlet,
+  useActionData,
+  useSearchParams,
+} from "@remix-run/react";
+import { useState } from "react";
 import { Button } from "~/components/Button";
-import { CodeConfirmationModal } from "~/components/CodeConfirmationModal";
-import { ForgotPasswordSuccess } from "~/components/ForgotPasswordSuccess";
 import { TextInput } from "~/components/TextInput";
 import { safeRedirect, validateEmail } from "~/utils";
 
@@ -28,20 +32,14 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export default function Register() {
+  const actionData = useActionData<typeof action>();
+
   const [searchParams] = useSearchParams();
+  const [email, setEmail] = useState("");
+
   const redirectTo =
     searchParams.get("redirectTo") ||
-    "/password-recovery?codeConfirmationModal=true";
-  const actionData = useActionData<typeof action>();
-  const emailRef = useRef<HTMLInputElement>(null);
-  const isModalInitialyOpen = Boolean(
-    searchParams.get("codeConfirmationModal")
-  );
-
-  const [codeModalOpen, setCodeModalOpen] = useState(
-    isModalInitialyOpen ?? false
-  );
-  const [forgotPasswordSuccess, setForgotPasswordSuccess] = useState(false);
+    `/password-recovery/code-confirmation?email=${email}`;
 
   return (
     <>
@@ -50,8 +48,9 @@ export default function Register() {
       </h2>
       <Form method="post" className="w-full">
         <TextInput
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
           label="E-mail"
-          ref={emailRef}
           id="email"
           required
           autoFocus={true}
@@ -82,22 +81,7 @@ export default function Register() {
           Login
         </Link>
       </div>
-      <CodeConfirmationModal
-        email={emailRef.current?.value}
-        open={codeModalOpen && Boolean(emailRef.current?.value)}
-        setOpen={setCodeModalOpen}
-        onConfirmation={() => {
-          setCodeModalOpen(false);
-          setForgotPasswordSuccess(true);
-        }}
-      />
-      <ForgotPasswordSuccess
-        open={forgotPasswordSuccess}
-        setOpen={setForgotPasswordSuccess}
-        onConfirmation={() => {
-          setForgotPasswordSuccess(false);
-        }}
-      />
+      <Outlet />
     </>
   );
 }

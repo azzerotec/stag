@@ -1,14 +1,15 @@
 import { Modal } from "./modal";
 import { Coluna } from "./auxiliares";
+import { Button } from "./Button";
 
 export const ForgotPasswordSuccess = ({
   open,
   setOpen,
-  onConfirmation,
+  setConfirmation = () => {},
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
-  onConfirmation: () => void;
+  setConfirmation?: () => void;
 }) => {
   return (
     <Modal open={open} setOpen={setOpen}>
@@ -20,12 +21,7 @@ export const ForgotPasswordSuccess = ({
           Enviamos um email com o link para fazer a mudança de senha da sua
           conta!
         </h2>
-        <button
-          className="mt-6 w-96 rounded-md bg-a606875 py-2 font-medium text-white"
-          onClick={onConfirmation}
-        >
-          Concluir
-        </button>
+        <Button onClick={setConfirmation}>Concluir</Button>
       </Coluna>
     </Modal>
   );
