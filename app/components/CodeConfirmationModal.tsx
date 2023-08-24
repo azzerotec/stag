@@ -1,30 +1,39 @@
 import { Modal } from "./modal";
-import { Coluna } from "./auxiliares";
 import { InputNumber } from "./InputNumber";
 import { Button } from "./Button";
+import { Form } from "@remix-run/react";
 
-export const CodeConfirmationModal = ({
-  open,
-  setOpen,
-  onConfirmation,
-}: {
+type Props = {
+  email?: string;
   open: boolean;
   setOpen: (open: boolean) => void;
   onConfirmation: () => void;
-}) => {
+};
+
+export const CodeConfirmationModal = ({
+  email,
+  open,
+  setOpen,
+  onConfirmation,
+}: Props) => {
   return (
     <Modal open={open} setOpen={setOpen}>
-      <Coluna className=" max-w-2xl items-center p-24 text-center">
+      <Form className="flex max-w-2xl flex-col items-center p-24 text-center">
         <h1 className="font-montserrat text-3xl font-semibold text-a374151">
-          Calma que já vai lembrar!
+          Digite o código recebido!
         </h1>
         <h2 className="mt-6 font-montserrat text-sm font-medium text-a606771">
-          Mandamos um código para{" "}
-          <b className="text-a111827">fulano@gmail.com</b>
+          Mandamos um código para <b className="text-a111827">{email}</b>
         </h2>
         <InputNumber />
-        <Button onClick={onConfirmation}> Entrar</Button>
-      </Coluna>
+        <h2 className="mt-6 font-montserrat text-sm font-medium text-a606771">
+          <h2 className="mt-6 font-montserrat text-sm font-medium text-a606771">
+            Mandamos um código para{" "}
+            <button className="text-a111827">{email}</button>
+          </h2>
+        </h2>
+        <Button onClick={onConfirmation}>Reenviar código</Button>
+      </Form>
     </Modal>
   );
 };
