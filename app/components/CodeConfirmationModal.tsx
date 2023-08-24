@@ -1,5 +1,5 @@
 import { Modal } from "./modal";
-import { OTPGroup } from "./InputNumber";
+import { OTPInput } from "./OTPInput";
 import { Form } from "@remix-run/react";
 import { Button } from "./Button";
 
@@ -33,7 +33,7 @@ export const CodeConfirmationModal = ({
           Mandamos um código para <b className="text-a111827">{email}</b>
         </h2>
         <div className="my-6">
-          <OTPGroup />
+          <OTPInput />
           {errors?.code ? (
             <div className="pt-1 text-red-700" id="code-error">
               {errors.code}
