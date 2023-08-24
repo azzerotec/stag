@@ -66,7 +66,7 @@ export default function Register() {
           </div>
         ) : null}
         <input type="hidden" name="redirectTo" value={redirectTo} />
-        <Button type="submit">Receber código</Button>
+        <Button>Receber código</Button>
       </Form>
 
       <div className="mt-14 text-a606771">

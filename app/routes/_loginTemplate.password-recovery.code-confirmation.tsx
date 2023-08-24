@@ -13,8 +13,6 @@ export const action = async ({ request }: ActionArgs) => {
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
   const isCodeValid = code0 || code1 || code2 || code3;
 
-  console.log(code0, code1, code2, code3);
-
   if (!isCodeValid) {
     return json({ errors: { code: "Code is incorrect" } }, { status: 400 });
   }
