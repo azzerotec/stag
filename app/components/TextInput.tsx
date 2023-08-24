@@ -13,7 +13,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>(function Input(
     <div className={"relative mt-4 " + className}>
       <label
         htmlFor={id}
-        className="absolute -top-2 left-2 inline-block bg-white px-1 text-sm font-medium text-a374151 font-inter"
+        className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-a374151 font-inter"
       >
         {label}
       </label>

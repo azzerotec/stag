@@ -15,7 +15,7 @@ export default function SidebarTemplate() {
   return (
     <Linha className="h-full grow">
       <BackgroundImage />
-      <Coluna className="items-center justify-center p-32 align-middle font-inter">
+      <Coluna className="md:min-w[520px] min-w-[626px] items-center justify-center p-32 text-center align-middle font-inter">
         <Outlet />
       </Coluna>
     </Linha>

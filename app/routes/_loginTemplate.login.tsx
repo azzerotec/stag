@@ -1,9 +1,7 @@
 import { json } from "@remix-run/node";
 import type { ActionArgs } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
-import { useEffect, useRef, useState } from "react";
-import { CodeConfirmationModal } from "~/components/CodeConfirmationModal";
-import { ForgotPasswordSuccess } from "~/components/ForgotPasswordSuccess";
+import { useEffect, useRef } from "react";
 import { TextInput } from "~/components/TextInput";
 import { Linha } from "~/components/auxiliares";
 import { LogoStag } from "~/images/icons/LogoStag";
@@ -57,9 +55,6 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export default function Login() {
-  const [open, setOpen] = useState(false);
-  const [forgotPasswordSuccess, setForgotPasswordSuccess] = useState(false);
-
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") || "/";
   const actionData = useActionData<typeof action>();
@@ -81,7 +76,7 @@ export default function Login() {
       <h2 className="mb-4 font-montserrat text-2xl font-semibold text-a374151">
         Entre na sua conta
       </h2>
-      <Form method="post">
+      <Form method="post" className="w-full">
         <TextInput
           label="E-mail ou nº OAB"
           ref={emailRef}
@@ -118,11 +113,11 @@ export default function Login() {
         <input type="hidden" name="redirectTo" value={redirectTo} />
         <button
           type="submit"
-          className="mt-8 w-80 rounded-md bg-a606875 py-2 font-medium text-white "
+          className="mt-8 w-full rounded-md bg-a606875 py-2 font-medium text-white "
         >
           Entrar
         </button>
-        <Linha className="mt-4 w-80 justify-between text-xs">
+        <Linha className="mt-4 w-full justify-between text-xs">
           <div>
             <input
               id="remember"
@@ -134,18 +129,20 @@ export default function Login() {
               Lembrar-me
             </label>
           </div>
-          <button
-            className="text-sm font-medium text-a8B919A"
-            onClick={() => {
-              setOpen(true);
+          <Link
+            to={{
+              pathname: "/password-recovery",
+              search:
+                emailRef.current?.value && "email=" + emailRef.current?.value,
             }}
+            className="text-sm font-medium text-a8B919A"
           >
             Esqueceu sua senha?
-          </button>
+          </Link>
         </Linha>
       </Form>
 
-      <span className="mt-14 text-a606771">
+      <Linha className="mt-14 text-a606771">
         Não tem uma conta?
         <Link
           to={{
@@ -156,22 +153,7 @@ export default function Login() {
         >
           Criar conta
         </Link>
-      </span>
-      <CodeConfirmationModal
-        open={open}
-        setOpen={setOpen}
-        onConfirmation={() => {
-          setOpen(false);
-          setForgotPasswordSuccess(true);
-        }}
-      />
-      <ForgotPasswordSuccess
-        open={forgotPasswordSuccess}
-        setOpen={setForgotPasswordSuccess}
-        onConfirmation={() => {
-          setForgotPasswordSuccess(false);
-        }}
-      />
+      </Linha>
     </>
   );
 }

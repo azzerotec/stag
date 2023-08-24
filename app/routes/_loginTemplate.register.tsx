@@ -2,6 +2,7 @@ import { json } from "@remix-run/node";
 import type { ActionArgs } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
+import { Button } from "~/components/Button";
 import { TermsOfUse } from "~/components/TermsOfUse";
 import { TextInput } from "~/components/TextInput";
 import { LogoStag } from "~/images/icons/LogoStag";
@@ -138,7 +139,7 @@ export default function Register() {
       <h2 className="mb-14 font-montserrat text-2xl font-semibold text-a374151">
         Hora de criar uma conta!
       </h2>
-      <Form method="post">
+      <Form method="post" className="w-full">
         <TextInput
           label="Nome completo"
           ref={nameRef}
@@ -196,12 +197,7 @@ export default function Register() {
           </div>
         ) : null}
         <input type="hidden" name="redirectTo" value={redirectTo} />
-        <button
-          className="mt-8 flex w-80 justify-center rounded-md bg-a606875 py-2 font-medium text-white"
-          type="submit"
-        >
-          Criar conta
-        </button>
+        <Button>Criar conta</Button>
       </Form>
 
       <div className=" mt-4 text-center text-a606771">

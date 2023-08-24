@@ -1,34 +1,52 @@
 import { Modal } from "./modal";
-import { Coluna } from "./auxiliares";
-import { InputNumber } from "./InputNumber";
+import { OTPInput } from "./OTPInput";
+import { Form } from "@remix-run/react";
+import { Button } from "./Button";
 
-export const CodeConfirmationModal = ({
-  open,
-  setOpen,
-  onConfirmation,
-}: {
+type Props = {
+  email: string;
   open: boolean;
   setOpen: (open: boolean) => void;
-  onConfirmation: () => void;
-}) => {
+  redirectTo: string;
+  errors?: {
+    code: string | null;
+  };
+};
+
+export const CodeConfirmationModal = ({
+  email,
+  open,
+  setOpen,
+  redirectTo,
+  errors,
+}: Props) => {
   return (
     <Modal open={open} setOpen={setOpen}>
-      <Coluna className=" max-w-2xl items-center p-24 text-center">
-        <h1 className="font-montserrat text-3xl font-semibold text-a374151">
-          Calma que já vai lembrar!
+      <Form
+        className="flex max-w-2xl flex-col items-center p-24 text-center"
+        method="POST"
+      >
+        <h1 className="mb-6 font-montserrat text-3xl font-semibold text-a374151">
+          Digite o código recebido!
         </h1>
-        <h2 className="mt-6 font-montserrat text-sm font-medium text-a606771">
-          Mandamos um código para{" "}
-          <b className="text-a111827">fulano@gmail.com</b>
+        <h2 className="font-montserrat text-sm font-medium text-a606771">
+          Mandamos um código para <b className="text-a111827">{email}</b>
         </h2>
-        <InputNumber />
-        <button
-          onClick={onConfirmation}
-          className="mt-6 w-80 rounded-md bg-a606875 py-2 font-medium text-white"
-        >
-          Entrar
-        </button>
-      </Coluna>
+        <div className="my-6">
+          <OTPInput />
+          {errors?.code ? (
+            <div className="pt-1 text-red-700" id="code-error">
+              {errors.code}
+            </div>
+          ) : null}
+        </div>
+        <h2 className=" font-montserrat text-sm font-medium text-a606771">
+          Não recebeu o código?{" "}
+          <button className="text-blue-500 underline">Reenviar código.</button>
+        </h2>
+        <input type="hidden" name="redirectTo" value={redirectTo} />
+        <Button>Enviar</Button>
+      </Form>
     </Modal>
   );
 };
