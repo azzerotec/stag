@@ -1,8 +1,3 @@
-import {
-  ClipboardDocumentCheckIcon,
-  UserGroupIcon,
-  XMarkIcon,
-} from "@heroicons/react/20/solid";
 import type { LoaderArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Link } from "@remix-run/react";
@@ -24,7 +19,7 @@ export default function FoundProcesses() {
         <div className="flex">
           <LogoStag className="ml-auto" />
           <Link to="/dashboard" className="ml-auto">
-            <XMarkIcon className="h-6 w-6" />
+            <span className="h-6 w-6">botao de fechar</span>
           </Link>
         </div>
 
@@ -35,7 +30,7 @@ export default function FoundProcesses() {
         <Linha className=" mt-6 justify-center">
           <Linha className="h-14 w-64 items-center rounded-md bg-aEDEDED align-middle text-a1E1E1E font-inter">
             <div className="ml-10">
-              <ClipboardDocumentCheckIcon className="h-6 w-6" />
+              <span className="h-6 w-6">check</span>
             </div>
             <Coluna className="ml-6">
               <span className="font-black">100</span>
@@ -45,7 +40,7 @@ export default function FoundProcesses() {
 
           <Linha className="ml-8 h-14 w-64 items-center rounded-md bg-aEDEDED align-middle text-a1E1E1E font-inter">
             <div className="ml-10">
-              <UserGroupIcon className="h-6 w-6" />
+              <span className="h-6 w-6">UserIcon</span>
             </div>
             <Coluna className="ml-6">
               <span className="font-black">100</span>
@@ -75,40 +70,52 @@ export default function FoundProcesses() {
           }}
         >
           <ListProcessFound
-            NomedoCliente={"Jane Cooper"}
-            CPF={"090.023.098-33"}
-            Contato={"+55 (48) 9 9981-2874"}
-            ESTADO={"SC"}
+            client={{
+              name: "Jane Cooper",
+              cpf: "090.023.098-33",
+              contato: "+55 (48) 9 9981-2874",
+              province: "SC",
+            }}
           />
           <ListProcessFound
-            NomedoCliente={"Cody Fisher"}
-            CPF={"Product Directives Officer"}
-            Contato={"cody.fisher@example.com"}
-            ESTADO={"Owner"}
+            client={{
+              name: "Cody Fisher",
+              cpf: "090.023.098-33",
+              contato: "cody.fisher@example.com",
+              province: "Owner",
+            }}
           />
           <ListProcessFound
-            NomedoCliente={"Esther Howard"}
-            CPF={"Forward Response Developer"}
-            Contato={"esther.howard@example.com"}
-            ESTADO={"Member"}
+            client={{
+              name: "Esther Howard",
+              cpf: "090.023.098-33",
+              contato: "esther.howard@example.com",
+              province: "Member",
+            }}
           />
           <ListProcessFound
-            NomedoCliente={"Jenny Wilson"}
-            CPF={"Central Security Manager"}
-            Contato={"jenny.wilson@example.com"}
-            ESTADO={"Member"}
+            client={{
+              name: "Jenny Wilson",
+              cpf: "090.023.098-33",
+              contato: "jenny.wilson@example.com",
+              province: "Member",
+            }}
           />
           <ListProcessFound
-            NomedoCliente={" Kristin Watson "}
-            CPF={"Lead Implementation Liaison"}
-            Contato={" kristin.watson@example.com"}
-            ESTADO={"Admin"}
+            client={{
+              name: "Kristin Watson",
+              cpf: "090.023.098-33",
+              contato: " kristin.watson@example.com",
+              province: "Admin",
+            }}
           />
           <ListProcessFound
-            NomedoCliente={"Cameron Williamson"}
-            CPF={"Internal Applications Engineer "}
-            Contato={" cameron.williamson@example.com"}
-            ESTADO={"Member"}
+            client={{
+              name: "Cameron Williamson",
+              cpf: "090.023.098-33",
+              contato: "cameron.williamson@example.com",
+              province: "Member",
+            }}
           />
         </div>
         <Linha className=" items-center justify-center pt-9 text-sm font-medium font-inter">
