@@ -1,6 +1,7 @@
 import { Modal } from "./modal";
 import { Coluna } from "./auxiliares";
 import { InputNumber } from "./InputNumber";
+import { Button } from "./Button";
 
 export const CodeConfirmationModal = ({
   open,
@@ -22,12 +23,7 @@ export const CodeConfirmationModal = ({
           <b className="text-a111827">fulano@gmail.com</b>
         </h2>
         <InputNumber />
-        <button
-          onClick={onConfirmation}
-          className="mt-6 w-80 rounded-md bg-a606875 py-2 font-medium text-white"
-        >
-          Entrar
-        </button>
+        <Button onClick={onConfirmation}> Entrar</Button>
       </Coluna>
     </Modal>
   );

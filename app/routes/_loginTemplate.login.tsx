@@ -81,7 +81,7 @@ export default function Login() {
       <h2 className="mb-4 font-montserrat text-2xl font-semibold text-a374151">
         Entre na sua conta
       </h2>
-      <Form method="post">
+      <Form method="post" className="w-full">
         <TextInput
           label="E-mail ou nº OAB"
           ref={emailRef}
@@ -118,11 +118,11 @@ export default function Login() {
         <input type="hidden" name="redirectTo" value={redirectTo} />
         <button
           type="submit"
-          className="mt-8 w-80 rounded-md bg-a606875 py-2 font-medium text-white "
+          className="mt-8 w-full rounded-md bg-a606875 py-2 font-medium text-white "
         >
           Entrar
         </button>
-        <Linha className="mt-4 w-80 justify-between text-xs">
+        <Linha className="mt-4 w-full justify-between text-xs">
           <div>
             <input
               id="remember"

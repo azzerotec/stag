@@ -13,7 +13,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function SidebarTemplate() {
   return (
-    <Linha className="h-full grow">
+    <Linha className="h-full grow ">
       <BackgroundImage />
       <Coluna className="items-center justify-center p-32 align-middle font-inter">
         <Outlet />
