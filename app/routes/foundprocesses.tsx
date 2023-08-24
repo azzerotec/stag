@@ -5,6 +5,7 @@ import {
 } from "@heroicons/react/20/solid";
 import type { LoaderArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
+import { Link } from "@remix-run/react";
 import { ListProcessFound } from "~/components/ListProcessFound";
 import { Coluna, Linha } from "~/components/auxiliares";
 import { LogoStag } from "~/images/icons/LogoStag";
@@ -19,9 +20,11 @@ export const loader = async ({ request }: LoaderArgs) => {
 export default function FoundProcesses() {
   return (
     <Coluna className=" px-32 py-11">
-      <div className="flex justify-center">
-        <LogoStag />
-        <XMarkIcon className="h-6 w-6" />
+      <div className="flex">
+        <LogoStag className="ml-auto" />
+        <Link to="/dashboard" className="ml-auto">
+          <XMarkIcon className="h-6 w-6" />
+        </Link>
       </div>
 
       <h2 className="mt-8 flex justify-center align-middle text-xl font-light text-a111827 font-inter">
