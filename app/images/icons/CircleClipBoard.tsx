@@ -1,4 +1,4 @@
-export const CircleClipBord = () => {
+export const CircleClipBoard = () => {
   return (
     <svg
       width="50"

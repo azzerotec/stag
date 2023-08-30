@@ -1,4 +1,4 @@
-export const CircleMuchPeoples = () => {
+export const CircleGroupPeople = () => {
   return (
     <svg
       width="51"
