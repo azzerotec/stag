@@ -23,6 +23,7 @@ export default {
         aEDEDED: "#EDEDED",
         a1E1E1E: "#1E1E1E",
         a6B7280: "#6B7280",
+        a6A6A6A: "#6A6A6A",
       },
     },
   },

@@ -1,3 +1,9 @@
+import { QuickActions } from "~/components/QuickActions";
+
 export default function Dashboard() {
-  return <>Dashboard</>;
+  return (
+    <>
+      <QuickActions />
+    </>
+  );
 }
