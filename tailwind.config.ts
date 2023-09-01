@@ -7,6 +7,10 @@ export default {
       fontFamily: {
         primary: ["Poppins"],
         montserrat: ["Montserrat"],
+        roboto: ["Roboto", "sans-serif"],
+      },
+      boxShadow: {
+        attjob: "0 4px 10px 0px rgba(0, 0, 0, 0.5)",
       },
       colors: {
         a374151: "#374151",
@@ -24,8 +28,11 @@ export default {
         a1E1E1E: "#1E1E1E",
         a6B7280: "#6B7280",
         a6A6A6A: "#6A6A6A",
+        aECECEC: "#ECECEC",
+        aFAFAFA: "#FAFAFA",
       },
     },
   },
+
   plugins: [require("tailwindcss-font-inter"), require("@tailwindcss/forms")],
 } satisfies Config;
