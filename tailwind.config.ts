@@ -30,6 +30,8 @@ export default {
         a6A6A6A: "#6A6A6A",
         aECECEC: "#ECECEC",
         aFAFAFA: "#FAFAFA",
+        aB9B9B9: "#B9B9B9",
+        a3F4349: "#3F4349",
       },
     },
   },
