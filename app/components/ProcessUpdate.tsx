@@ -1,27 +1,29 @@
+import { useState } from "react";
 import { Coluna, Linha } from "./auxiliares";
+import type { Update } from "~/routes/_sidebar._index";
 
-type Props = {
-  numberprocess: string;
-  nameclient: string;
-  data: string;
+type ProcessUpdateProps = {
+  processNumber: string;
+  clientName: string;
+  date: string;
   content: string;
 };
 
-const ListProcessCity = ({
-  numberprocess,
-  nameclient,
-  data,
+const ProcessUpdate = ({
+  processNumber,
+  clientName,
+  date,
   content,
-}: Props) => {
+}: ProcessUpdateProps) => {
   return (
     <div className="my-3">
       <Linha className=" justify-between text-sm text-a374151 font-inter">
         <span>
-          <b className="font-bold">{numberprocess}</b> {nameclient}
+          <b className="font-bold">{processNumber}</b> {clientName}
         </span>
         <div>
           <span>icon</span>
-          <span className="text-sm font-light text-a6B7280">{data}</span>
+          <span className="text-sm font-light text-a6B7280">{date}</span>
         </div>
       </Linha>
       <span className=" mt-2 text-xs font-light leading-5 font-inter">
@@ -31,25 +33,43 @@ const ListProcessCity = ({
   );
 };
 
-type PropsCity = {
+type CourtProps = {
   Imagem: string;
   city: string;
-  amountprocess: string;
+  updateCount: number;
+  active: boolean;
+  onClick: (name: string) => void;
 };
 
-const ListCity = ({ Imagem, city, amountprocess }: PropsCity) => {
+const Court = ({ Imagem, city, updateCount, active, onClick }: CourtProps) => {
   return (
-    <Coluna className="h-36 w-28 items-center rounded-lg bg-aECECEC">
+    <Coluna
+      className={`h-36 w-28 items-center rounded-lg bg-aECECEC ${
+        active ? "bg-gray-400" : ""
+      }`}
+      onClick={() => onClick(city)}
+    >
       <span>{Imagem}</span>
       <h3>{city}</h3>
       <span className="mt-3 text-sm text-a6A6A6A font-inter">
-        {amountprocess}
+        {updateCount} processos
       </span>
     </Coluna>
   );
 };
 
-export const ProcessUpdate = () => {
+type UpdatesSectionProps = {
+  updates: Update[];
+};
+
+export const UpdatesSection = ({ updates }: UpdatesSectionProps) => {
+  const defaultCourt = updates[0] ? updates[0].name : false;
+  const [selectedCourt, setSelectedCourt] = useState(defaultCourt);
+
+  const selectedCourtUpdates = updates.find(
+    ({ name }) => name === selectedCourt
+  );
+
   return (
     <>
       <Coluna className="p-8">
@@ -60,48 +80,31 @@ export const ProcessUpdate = () => {
           Lorem ipsum dolor sit amet consectetur.
         </span>
         <Linha className="mt-2 w-96 justify-between">
-          <ListCity
-            Imagem={"imagem"}
-            city={"TJRS"}
-            amountprocess={"3 processos"}
-          />
-          <ListCity
-            Imagem={"imagem"}
-            city={"TJRS"}
-            amountprocess={"3 processos"}
-          />
-          <ListCity
-            Imagem={"imagem"}
-            city={"TJRS"}
-            amountprocess={"3 processos"}
-          />
+          {updates.map(({ name, updates }) => (
+            <Court
+              key={name}
+              active={name === selectedCourt}
+              Imagem={"imagem"}
+              city={name}
+              updateCount={updates.length}
+              onClick={(name) => setSelectedCourt(name)}
+            />
+          ))}
         </Linha>
 
         <div className=" mt-2 rounded-lg border-b-2 p-3 shadow-attjob">
-          <ListProcessCity
-            numberprocess={"3719283983798746 -"}
-            nameclient={"José Arcos Macedo"}
-            data={"23/05/2021"}
-            content={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet..."
-            }
-          />
-          <ListProcessCity
-            numberprocess={"3719283983798746 -"}
-            nameclient={"José Arcos Macedo"}
-            data={"23/05/2021"}
-            content={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet..."
-            }
-          />
-          <ListProcessCity
-            numberprocess={"3719283983798746 -"}
-            nameclient={"José Arcos Macedo"}
-            data={"23/05/2021"}
-            content={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet..."
-            }
-          />
+          {selectedCourtUpdates &&
+            selectedCourtUpdates.updates.map(
+              ({ clientName, date, processNumber, content }) => (
+                <ProcessUpdate
+                  key={processNumber}
+                  processNumber={processNumber}
+                  clientName={clientName}
+                  date={date}
+                  content={content}
+                />
+              )
+            )}
         </div>
       </Coluna>
     </>

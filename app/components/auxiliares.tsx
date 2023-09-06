@@ -1,5 +1,7 @@
 import type { PropsWithChildren } from "react";
 
+type ColunaPros = { className?: string; onClick?: () => void };
+
 export const Linha = ({
   children,
   className = "",
@@ -10,8 +12,11 @@ export const Linha = ({
 export const Coluna = ({
   children,
   className = "",
-}: PropsWithChildren<{ className?: string }>) => (
-  <div className={`flex flex-col ${className}`}>{children}</div>
+  onClick,
+}: PropsWithChildren<ColunaPros>) => (
+  <div onClick={onClick} className={`flex flex-col ${className}`}>
+    {children}
+  </div>
 );
 
 type Props = {
