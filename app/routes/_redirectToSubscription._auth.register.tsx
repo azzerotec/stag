@@ -16,7 +16,10 @@ export const action = async ({ request }: ActionArgs) => {
   const name = formData.get("name");
   const email = formData.get("email");
   const password = formData.get("password");
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
+  const redirectTo = safeRedirect(
+    formData.get("redirectTo"),
+    "/plan-selection"
+  );
 
   if (!validateText(oab)) {
     return json(
@@ -115,7 +118,7 @@ export const action = async ({ request }: ActionArgs) => {
 
 export default function Register() {
   const [searchParams] = useSearchParams();
-  const redirectTo = searchParams.get("redirectTo") ?? undefined;
+  const redirectTo = searchParams.get("redirectTo") ?? "/plan-selection";
   const actionData = useActionData<typeof action>();
   const oabRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);

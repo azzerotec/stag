@@ -2,6 +2,7 @@ import type { Password, User } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 import { prisma } from "~/db.server";
+import { createCustomer } from "~/stripe.server";
 
 export type { User } from "@prisma/client";
 
@@ -20,17 +21,33 @@ export async function createUser(
   password: string
 ) {
   const hashedPassword = await bcrypt.hash(password, 10);
+  const customer = await createCustomer({ email, name });
 
   return prisma.user.create({
     data: {
       oab,
       name,
       email,
+      customerId: customer.id,
       password: {
         create: {
           hash: hashedPassword,
         },
       },
+    },
+  });
+}
+
+export function registerSubscription(
+  id: User["id"],
+  subscriptionId: User["subscriptionId"],
+  priceId: User["priceId"]
+) {
+  return prisma.user.update({
+    where: { id },
+    data: {
+      subscriptionId,
+      priceId,
     },
   });
 }

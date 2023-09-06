@@ -47,20 +47,30 @@ export async function requireUserId(
   redirectTo: string = new URL(request.url).pathname
 ) {
   const userId = await getUserId(request);
+
   if (!userId) {
     const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
     throw redirect(`/login?${searchParams}`);
   }
+
   return userId;
 }
 
 export async function requireUser(request: Request) {
   const userId = await requireUserId(request);
-
   const user = await getUserById(userId);
+
   if (user) return user;
 
   throw await logout(request);
+}
+
+export async function requireSubscription(request: Request) {
+  const user = await requireUser(request);
+
+  if (user && user.subscriptionId) return user;
+
+  throw redirect(`/plan-selection`);
 }
 
 export async function createUserSession({
