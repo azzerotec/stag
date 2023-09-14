@@ -46,9 +46,9 @@ const processUpdates = [
   },
 ];
 
-const updateFactory = (name: string) => ({
+const updateFactory = (name: string, updates?: typeof processUpdates) => ({
   name,
-  updates: processUpdates,
+  updates: updates || processUpdates,
 });
 
 export type Update = {
@@ -64,7 +64,7 @@ export const loader = () => {
     TJSC,
     updateFactory("TJRS"),
     updateFactory("TRF4"),
-    updateFactory("STF"),
+    updateFactory("STF", []),
   ];
 
   return json({
@@ -80,7 +80,7 @@ export default function Dashboard() {
       <Linha>
         <Coluna className="w-1/2">
           <QuickActions />
-          <UpdatesSection updates={updates} />
+          <UpdatesSection updates={[]} />
         </Coluna>
         <Coluna>
           <SummaryDay />
