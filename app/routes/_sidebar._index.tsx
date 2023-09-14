@@ -80,7 +80,7 @@ export default function Dashboard() {
       <Linha>
         <Coluna className="w-1/2">
           <QuickActions />
-          <UpdatesSection updates={[]} />
+          <UpdatesSection updates={updates} />
         </Coluna>
         <Coluna>
           <SummaryDay />
