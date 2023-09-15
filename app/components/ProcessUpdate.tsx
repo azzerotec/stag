@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Coluna, Linha } from "./auxiliares";
 import type { Update } from "~/routes/_sidebar._index";
+import { EmptyList } from "./EmptyList";
 
 type ProcessUpdateProps = {
   processNumber: string;
@@ -79,22 +80,27 @@ export const UpdatesSection = ({ updates }: UpdatesSectionProps) => {
         <span className="mt-3 font-roboto text-sm font-extralight leading-4">
           Lorem ipsum dolor sit amet consectetur.
         </span>
-        <Linha className="mt-2 w-96 justify-between">
-          {updates.map(({ name, updates }) => (
-            <Court
-              key={name}
-              active={name === selectedCourt}
-              Imagem={"imagem"}
-              city={name}
-              updateCount={updates.length}
-              onClick={(name) => setSelectedCourt(name)}
-            />
-          ))}
-        </Linha>
 
-        <div className=" mt-2 rounded-lg border-b-2 p-3 shadow-attjob">
-          {selectedCourtUpdates &&
-            selectedCourtUpdates.updates.map(
+        {updates.length === 0 ? (
+          <EmptyList />
+        ) : (
+          <Linha className="mt-2 w-96 justify-between">
+            {updates.map(({ name, updates }) => (
+              <Court
+                key={name}
+                active={name === selectedCourt}
+                Imagem={"imagem"}
+                city={name}
+                updateCount={updates.length}
+                onClick={(name) => setSelectedCourt(name)}
+              />
+            ))}
+          </Linha>
+        )}
+
+        {selectedCourtUpdates && selectedCourtUpdates.updates.length > 0 ? (
+          <div className=" mt-2 rounded-lg border-b-2 p-3 shadow-attjob">
+            {selectedCourtUpdates.updates.map(
               ({ clientName, date, processNumber, content }) => (
                 <ProcessUpdate
                   key={processNumber}
@@ -105,7 +111,8 @@ export const UpdatesSection = ({ updates }: UpdatesSectionProps) => {
                 />
               )
             )}
-        </div>
+          </div>
+        ) : null}
       </Coluna>
     </>
   );
