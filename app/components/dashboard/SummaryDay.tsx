@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import { Coluna, Linha } from "./auxiliares";
+import { Coluna, Linha } from "../auxiliares";
 import type { DailySummaryItem } from "~/routes/_sidebar._index";
-import { EmptyList } from "./EmptyList";
-import { Select } from "./Select";
-import { DatePicker } from "./DatePicker";
+import { EmptyList } from "../EmptyList";
+import { Select } from "../Select";
+import { DatePicker } from "../DatePicker";
 
 type PropsTask = {
   title: string;

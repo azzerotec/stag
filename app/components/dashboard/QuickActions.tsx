@@ -1,4 +1,4 @@
-import { Coluna, Linha } from "./auxiliares";
+import { Coluna, Linha } from "../auxiliares";
 import { CircleMorePerson } from "~/images/icons/CircleMorePerson";
 import { CircleGroupPeople } from "~/images/icons/CircleGroupPeople";
 import type { ReactNode } from "react";

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Coluna, Linha } from "./auxiliares";
+import { Coluna, Linha } from "../auxiliares";
 import type { Update } from "~/routes/_sidebar._index";
-import { EmptyList } from "./EmptyList";
+import { EmptyList } from "../EmptyList";
 
 type ProcessUpdateProps = {
   processNumber: string;

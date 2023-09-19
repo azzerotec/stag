@@ -1,8 +1,8 @@
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { UpdatesSection } from "~/components/ProcessUpdate";
-import { QuickActions } from "~/components/QuickActions";
-import { SummaryDay } from "~/components/SummaryDay";
+import { UpdatesSection } from "~/components/dashboard/ProcessUpdate";
+import { QuickActions } from "~/components/dashboard/QuickActions";
+import { SummaryDay } from "~/components/dashboard/SummaryDay";
 import { Coluna, Linha } from "~/components/auxiliares";
 
 const TJSCUpdates = [
