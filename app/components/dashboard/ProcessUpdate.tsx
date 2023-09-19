@@ -1,66 +1,12 @@
 import { useState } from "react";
-import { Coluna, Linha } from "../auxiliares";
-import type { Update } from "~/routes/_sidebar._index";
+import { Coluna } from "../auxiliares";
 import { EmptyList } from "../EmptyList";
-
-type ProcessUpdateProps = {
-  processNumber: string;
-  clientName: string;
-  date: string;
-  content: string;
-};
-
-const ProcessUpdate = ({
-  processNumber,
-  clientName,
-  date,
-  content,
-}: ProcessUpdateProps) => {
-  return (
-    <div className="my-3">
-      <Linha className=" justify-between text-sm text-a374151 font-inter">
-        <span>
-          <b className="font-bold">{processNumber}</b> {clientName}
-        </span>
-        <div>
-          <span>icon</span>
-          <span className="text-sm font-light text-a6B7280">{date}</span>
-        </div>
-      </Linha>
-      <span className=" mt-2 text-xs font-light leading-5 font-inter">
-        {content}
-      </span>
-    </div>
-  );
-};
-
-type CourtProps = {
-  Imagem: string;
-  city: string;
-  updateCount: number;
-  active: boolean;
-  onClick: (name: string) => void;
-};
-
-const Court = ({ Imagem, city, updateCount, active, onClick }: CourtProps) => {
-  return (
-    <Coluna
-      className={`h-36 w-28 items-center rounded-lg bg-aECECEC ${
-        active ? "bg-gray-400" : ""
-      }`}
-      onClick={() => onClick(city)}
-    >
-      <span>{Imagem}</span>
-      <h3>{city}</h3>
-      <span className="mt-3 text-sm text-a6A6A6A font-inter">
-        {updateCount} processos
-      </span>
-    </Coluna>
-  );
-};
+import { Court } from "./CourtCard";
+import { UpdateList } from "./UpdateList";
+import type { CourtUpdates } from "~/models/update.server";
 
 type UpdatesSectionProps = {
-  updates: Update[];
+  updates: CourtUpdates[];
 };
 
 export const UpdatesSection = ({ updates }: UpdatesSectionProps) => {
@@ -84,7 +30,7 @@ export const UpdatesSection = ({ updates }: UpdatesSectionProps) => {
         {updates.length === 0 ? (
           <EmptyList />
         ) : (
-          <Linha className="mt-2 w-96 justify-between">
+          <div className="mt-2 flex w-full gap-3 overflow-auto p-2">
             {updates.map(({ name, updates }) => (
               <Court
                 key={name}
@@ -95,23 +41,11 @@ export const UpdatesSection = ({ updates }: UpdatesSectionProps) => {
                 onClick={(name) => setSelectedCourt(name)}
               />
             ))}
-          </Linha>
+          </div>
         )}
 
         {selectedCourtUpdates && selectedCourtUpdates.updates.length > 0 ? (
-          <div className=" mt-2 rounded-lg border-b-2 p-3 shadow-attjob">
-            {selectedCourtUpdates.updates.map(
-              ({ clientName, date, processNumber, content }) => (
-                <ProcessUpdate
-                  key={processNumber}
-                  processNumber={processNumber}
-                  clientName={clientName}
-                  date={date}
-                  content={content}
-                />
-              )
-            )}
-          </div>
+          <UpdateList updateList={selectedCourtUpdates.updates} />
         ) : null}
       </Coluna>
     </>
