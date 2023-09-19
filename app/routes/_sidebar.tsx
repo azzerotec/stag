@@ -16,10 +16,8 @@ export const loader = async ({ request }: LoaderArgs) => {
 export default function SidebarTemplate() {
   return (
     <SidebarLayout sidebar={<Sidebar />}>
-      <main className="flex grow flex-col py-10">
-        <div className="px-4 sm:px-6 lg:px-8">
-          <Outlet />
-        </div>
+      <main className="flex w-full flex-col px-4 py-10 sm:px-6 lg:px-8 ">
+        <Outlet />
       </main>
     </SidebarLayout>
   );
