@@ -16,9 +16,10 @@ model User {
   email    String    @unique
   password Password?
 
-  customerId     String?
-  subscriptionId String?
-  priceId        String?
+  customerId         String?
+  subscriptionId     String?
+  priceId            String?
+  subscriptionActive Boolean @default(false)
 
   name      String
   birthdate DateTime?

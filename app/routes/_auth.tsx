@@ -8,7 +8,8 @@ import { getUser } from "~/session.server";
 export const loader = async ({ request }: LoaderArgs) => {
   const user = await getUser(request);
 
-  if (user && user.subscriptionId && user.priceId) return redirect("/");
+  if (user && user.subscriptionId && user.priceId && user.subscriptionActive)
+    return redirect("/");
 
   return json({ ok: true });
 };

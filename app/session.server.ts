@@ -68,9 +68,9 @@ export async function requireUser(request: Request) {
 export async function requireSubscription(request: Request) {
   const user = await requireUser(request);
 
-  if (user && user.subscriptionId) return user;
+  if (user && user.subscriptionActive) return user;
 
-  throw redirect(`/plan-selection`);
+  throw redirect(`/subscription`);
 }
 
 export async function createUserSession({

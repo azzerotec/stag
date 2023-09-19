@@ -1,5 +1,5 @@
-import { json } from "@remix-run/node";
-import type { ActionArgs } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "~/components/Button";
@@ -7,8 +7,17 @@ import { TermsOfUse } from "~/components/TermsOfUse";
 import { TextInput } from "~/components/TextInput";
 import { LogoStag } from "~/images/icons/LogoStag";
 import { createUser, getUserByEmail } from "~/models/user.server";
-import { createUserSession } from "~/session.server";
+import { createUserSession, getUser } from "~/session.server";
 import { safeRedirect, validateEmail, validateText } from "~/utils";
+
+export const loader = async ({ request }: LoaderArgs) => {
+  const user = await getUser(request);
+
+  if (user && user.priceId) redirect("/payment");
+  if (user) return redirect("/plan-selection");
+
+  return json({ ok: true });
+};
 
 export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();

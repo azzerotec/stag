@@ -4,7 +4,7 @@ import type { User } from "@prisma/client";
 
 invariant(process.env.STRIPE_SECRET, "STRIPE_SECRET must be set");
 
-const stripe = new Stripe(process.env.STRIPE_SECRET, {
+export const stripe = new Stripe(process.env.STRIPE_SECRET, {
   apiVersion: "2023-08-16",
 });
 
