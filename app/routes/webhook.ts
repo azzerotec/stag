@@ -1,5 +1,7 @@
 import type { ActionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
+import type Stripe from "stripe";
+import { setSubscriptionStatus } from "~/models/user.server";
 import { stripe } from "~/stripe.server";
 import { getErrorMessage } from "~/utils/getErrorMessage";
 
@@ -33,19 +35,11 @@ export const action = async ({ request }: ActionArgs) => {
   }
 
   switch (payload.type) {
-    case "payment_intent.succeeded":
-      const paymentIntent = payload.data.object;
-      console.log("subscription success", paymentIntent);
-      // Then define and call a method to handle the successful payment intent.
-      // handlePaymentIntentSucceeded(paymentIntent);
+    case "customer.subscription.updated":
+      const subscription = payload.data.object as Stripe.Subscription;
+      if (subscription.status === "active")
+        setSubscriptionStatus(subscription.id, subscription.status);
       break;
-    case "payment_method.attached":
-      const paymentMethod = payload.data.object;
-      console.log("Added credit card info", paymentMethod);
-      // Then define and call a method to handle the successful attachment of a PaymentMethod.
-      // handlePaymentMethodAttached(paymentMethod);
-      break;
-    // ... handle other event types
     default:
       console.log(`Unhandled event type ${payload.type}`);
   }

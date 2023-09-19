@@ -68,9 +68,21 @@ export async function requireUser(request: Request) {
 export async function requireSubscription(request: Request) {
   const user = await requireUser(request);
 
-  if (user && user.subscriptionActive) return user;
+  if (user && user.subscriptionId)
+    return { user, subscriptionId: user.subscriptionId };
 
   throw redirect(`/subscription`);
+}
+
+export async function requireActiveSubscription(request: Request) {
+  const { user } = await requireSubscription(request);
+
+  console.log(user);
+
+  if (user && user.subscriptionStatus === "active")
+    return { user, subscriptionStatus: user.subscriptionStatus };
+
+  throw redirect(`/subscription/invalid`);
 }
 
 export async function createUserSession({

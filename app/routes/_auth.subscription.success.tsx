@@ -1,9 +1,12 @@
-import type { LoaderArgs } from "@remix-run/node";
+import { redirect, type LoaderArgs } from "@remix-run/node";
 import { requireSubscription } from "~/session.server";
 import { getSubscription } from "~/stripe.server";
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const user = await requireSubscription(request);
+  const { subscriptionId } = await requireSubscription(request);
+  const subscription = await getSubscription(subscriptionId);
 
-  const subscription = getSubscription(user.subscriptionId);
+  if (subscription.status === "active") return redirect("/");
+
+  return redirect("/subscription/invalid");
 };

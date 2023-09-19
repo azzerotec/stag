@@ -17,9 +17,9 @@ model User {
   password Password?
 
   customerId         String?
-  subscriptionId     String?
+  subscriptionId     String? @unique
   priceId            String?
-  subscriptionActive Boolean @default(false)
+  subscriptionStatus String  @default("incomplete")
 
   name      String
   birthdate DateTime?
