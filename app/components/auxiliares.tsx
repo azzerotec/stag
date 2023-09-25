@@ -1,30 +1,33 @@
 import type { PropsWithChildren } from "react";
 
-type ColunaPros = { className?: string; onClick?: () => void };
+type Props = { className?: string; onClick?: () => void };
 
 export const Linha = ({
   children,
   className = "",
-}: PropsWithChildren<{ className?: string }>) => (
-  <div className={`flex flex-row ${className}`}>{children}</div>
+  onClick,
+}: PropsWithChildren<Props>) => (
+  <div onClick={onClick} className={`flex flex-row ${className}`}>
+    {children}
+  </div>
 );
 
 export const Coluna = ({
   children,
   className = "",
   onClick,
-}: PropsWithChildren<ColunaPros>) => (
+}: PropsWithChildren<Props>) => (
   <div onClick={onClick} className={`flex flex-col ${className}`}>
     {children}
   </div>
 );
 
-type Props = {
+type TextInputProps = {
   placeholder: string;
   className?: string;
 };
 
-export const TextInput = ({ placeholder, className }: Props) => (
+export const TextInput = ({ placeholder, className }: TextInputProps) => (
   <input
     type="text"
     placeholder={placeholder}

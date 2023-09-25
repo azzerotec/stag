@@ -1,18 +1,26 @@
 import type { LoaderArgs } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
-import { Link } from "@remix-run/react";
-import { ListProcessFound } from "~/components/ListProcessFound";
+import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
+import { useState } from "react";
+import { ClintTable } from "~/components/ClientTable";
+import { ProcessesTable } from "~/components/ProcessesTable";
 import { Coluna, Linha } from "~/components/auxiliares";
 import { LogoStag } from "~/images/icons/LogoStag";
-import { getUserId } from "~/session.server";
+import { getClients } from "~/models/client.server";
+import { getProcesses } from "~/models/process.server";
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const userId = await getUserId(request);
-  if (userId) return redirect("/");
-  return json({ ok: true });
+  const clients = getClients();
+  const processes = getProcesses();
+  //const userId = await getUserId(request);
+  //if (userId) return redirect("/");
+  return json({ ok: true, clients, processes });
 };
 
 export default function FoundProcesses() {
+  const { clients: ClientsList } = useLoaderData<typeof loader>();
+  const [asd, setAsd] = useState<string>("processes");
+
   return (
     <Coluna className="bg-aF9FAFB">
       <Coluna className="mx-32 my-11 rounded-lg bg-white px-4 py-6">
@@ -27,8 +35,15 @@ export default function FoundProcesses() {
           Resultado da busca:
         </h2>
 
-        <Linha className=" mt-6 justify-center">
-          <Linha className="h-14 w-64 items-center rounded-md bg-aEDEDED align-middle text-a1E1E1E font-inter">
+        <Linha className=" mt-6 justify-center gap-8">
+          <Linha
+            onClick={() => {
+              setAsd("processes");
+            }}
+            className={`h-14 w-64 items-center rounded-md align-middle text-a1E1E1E font-inter ${
+              asd === "processes" ? "bg-slate-400" : "bg-aEDEDED"
+            }`}
+          >
             <div className="ml-10">
               <span className="h-6 w-6">check</span>
             </div>
@@ -38,7 +53,14 @@ export default function FoundProcesses() {
             </Coluna>
           </Linha>
 
-          <Linha className="ml-8 h-14 w-64 items-center rounded-md bg-aEDEDED align-middle text-a1E1E1E font-inter">
+          <Linha
+            onClick={() => {
+              setAsd("clients");
+            }}
+            className={`h-14 w-64 items-center rounded-md align-middle text-a1E1E1E font-inter  ${
+              asd === "clients" ? "bg-slate-400" : "bg-aEDEDED"
+            }`}
+          >
             <div className="ml-10">
               <span className="h-6 w-6">UserIcon</span>
             </div>
@@ -48,76 +70,9 @@ export default function FoundProcesses() {
             </Coluna>
           </Linha>
         </Linha>
+        {asd === "processes" ? <ProcessesTable clients={ClientsList} /> : null}
+        {asd === "clients" ? <ClintTable clients={ClientsList} /> : null}
 
-        <Linha className="mt-8 border-b text-xs font-extrabold font-inter">
-          <text className="flex h-14 w-64 items-center p-2 align-middle">
-            Cliente
-          </text>
-          <text className="flex h-14 w-80 items-center p-2 align-middle">
-            CPF
-          </text>
-          <text className="flex h-14 w-80 items-center p-2 align-middle">
-            Contato
-          </text>
-          <Linha className="flex h-14 w-36 items-center p-2 align-middle">
-            <text className="ml-2">ESTADO</text>
-          </Linha>
-        </Linha>
-        <div
-          className="h-80 overflow-y-scroll rounded"
-          style={{
-            boxShadow: "0px -31px 10px -29px rgba(0, 0, 0, 0.25) inset",
-          }}
-        >
-          <ListProcessFound
-            client={{
-              name: "Jane Cooper",
-              cpf: "090.023.098-33",
-              contato: "+55 (48) 9 9981-2874",
-              province: "SC",
-            }}
-          />
-          <ListProcessFound
-            client={{
-              name: "Cody Fisher",
-              cpf: "090.023.098-33",
-              contato: "cody.fisher@example.com",
-              province: "Owner",
-            }}
-          />
-          <ListProcessFound
-            client={{
-              name: "Esther Howard",
-              cpf: "090.023.098-33",
-              contato: "esther.howard@example.com",
-              province: "Member",
-            }}
-          />
-          <ListProcessFound
-            client={{
-              name: "Jenny Wilson",
-              cpf: "090.023.098-33",
-              contato: "jenny.wilson@example.com",
-              province: "Member",
-            }}
-          />
-          <ListProcessFound
-            client={{
-              name: "Kristin Watson",
-              cpf: "090.023.098-33",
-              contato: " kristin.watson@example.com",
-              province: "Admin",
-            }}
-          />
-          <ListProcessFound
-            client={{
-              name: "Cameron Williamson",
-              cpf: "090.023.098-33",
-              contato: "cameron.williamson@example.com",
-              province: "Member",
-            }}
-          />
-        </div>
         <Linha className=" items-center justify-center pt-9 text-sm font-medium font-inter">
           <button className="h-10 w-72 rounded-md border">
             Não quero importar meus dados

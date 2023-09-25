@@ -10,7 +10,7 @@ export default {
         roboto: ["Roboto", "sans-serif"],
       },
       boxShadow: {
-        attjob: "0 4px 10px 0px rgba(0, 0, 0, 0.5)",
+        attjob: "0 4px 10px 0px rgba(0, 0, 0, 0.05)",
       },
       colors: {
         a374151: "#374151",
