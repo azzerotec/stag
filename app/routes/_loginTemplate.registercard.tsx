@@ -20,7 +20,7 @@ export default function CardRegister() {
   const [searchParams] = useSearchParams();
 
   return (
-    <Coluna>
+    <Coluna className="gap-4">
       <Linha>
         <span>arrow left</span>
         <h2>Pagamento no Stag.</h2>

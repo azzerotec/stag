@@ -76,7 +76,7 @@ export default function Login() {
       <h2 className="mb-4 font-montserrat text-2xl font-semibold text-a374151">
         Entre na sua conta
       </h2>
-      <Form method="post" className="w-full">
+      <Form method="post" className="flex w-full flex-col gap-4">
         <TextInput
           label="E-mail ou nº OAB"
           ref={emailRef}

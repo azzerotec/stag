@@ -139,7 +139,7 @@ export default function Register() {
       <h2 className="mb-14 font-montserrat text-2xl font-semibold text-a374151">
         Hora de criar uma conta!
       </h2>
-      <Form method="post" className="w-full">
+      <Form method="post" className="flex w-full flex-col gap-4">
         <TextInput
           label="Nome completo"
           ref={nameRef}
