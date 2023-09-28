@@ -2,7 +2,7 @@ import type { LoaderArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
-import { ClintTable } from "~/components/ClientTable";
+import { ClientTable } from "~/components/ClientTable";
 import { ProcessesTable } from "~/components/ProcessesTable";
 import { Coluna, Linha } from "~/components/auxiliares";
 import { LogoStag } from "~/images/icons/LogoStag";
@@ -71,7 +71,7 @@ export default function FoundProcesses() {
           </Linha>
         </Linha>
         {asd === "processes" ? <ProcessesTable clients={ClientsList} /> : null}
-        {asd === "clients" ? <ClintTable clients={ClientsList} /> : null}
+        {asd === "clients" ? <ClientTable clients={ClientsList} /> : null}
 
         <Linha className=" items-center justify-center pt-9 text-sm font-medium font-inter">
           <button className="h-10 w-72 rounded-md border">

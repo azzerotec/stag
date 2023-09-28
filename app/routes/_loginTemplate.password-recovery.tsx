@@ -46,7 +46,7 @@ export default function Register() {
       <h2 className="mb-14 font-montserrat text-2xl font-semibold text-a374151">
         Redefinir senha
       </h2>
-      <Form method="post" className="w-full">
+      <Form method="post" className="flex w-full flex-col gap-4">
         <TextInput
           value={email}
           onChange={(event) => setEmail(event.target.value)}

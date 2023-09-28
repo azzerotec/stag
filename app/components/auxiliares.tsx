@@ -21,16 +21,3 @@ export const Coluna = ({
     {children}
   </div>
 );
-
-type TextInputProps = {
-  placeholder: string;
-  className?: string;
-};
-
-export const TextInput = ({ placeholder, className }: TextInputProps) => (
-  <input
-    type="text"
-    placeholder={placeholder}
-    className={`my-3 box-border rounded border border-gray-200 px-3 py-2 ${className}`}
-  />
-);
