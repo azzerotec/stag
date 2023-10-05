@@ -1,7 +1,7 @@
 import type { Client } from "~/models/client.server";
-import { ListProcessFound } from "./ListProcessFound";
 import { Linha } from "./auxiliares";
-import { EmptyList } from "./EmptyList";
+import { EmptyListDashboard } from "./EmptyListDashBoard";
+import { ListClientsFound } from "./ListClientsFound";
 
 export const ClientTable = ({ clients }: { clients: Client[] }) => {
   return (
@@ -27,10 +27,10 @@ export const ClientTable = ({ clients }: { clients: Client[] }) => {
         }}
       >
         {clients.length === 0 ? (
-          <EmptyList />
+          <EmptyListDashboard />
         ) : (
           clients.map((client: Client) => (
-            <ListProcessFound client={client} key={client.cpf} />
+            <ListClientsFound client={client} key={client.cpf} />
           ))
         )}
       </div>

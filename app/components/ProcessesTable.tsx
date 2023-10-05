@@ -1,8 +1,8 @@
-import type { Client } from "~/models/client.server";
+import type { Process } from "~/models/process.server";
 import { ListProcessFound } from "./ListProcessFound";
 import { Linha } from "./auxiliares";
 
-export const ProcessesTable = ({ clients }: { clients: Client[] }) => {
+export const ProcessesTable = ({ processes }: { processes: Process[] }) => {
   return (
     <>
       <Linha className="mt-8 border-b text-xs font-extrabold font-inter">
@@ -20,13 +20,13 @@ export const ProcessesTable = ({ clients }: { clients: Client[] }) => {
         </Linha>
       </Linha>
       <div
-        className="h-80 overflow-y-scroll rounded"
+        className="flex grow flex-col overflow-y-auto rounded"
         style={{
           boxShadow: "0px -31px 10px -29px rgba(0, 0, 0, 0.25) inset",
         }}
       >
-        {clients.map((client: Client) => (
-          <ListProcessFound client={client} key={client.cpf} />
+        {processes.map((processes: Process) => (
+          <ListProcessFound Processes={processes} key={processes.number} />
         ))}
       </div>
     </>
