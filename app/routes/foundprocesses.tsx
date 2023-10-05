@@ -19,6 +19,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function FoundProcesses() {
   const { clients: ClientsList } = useLoaderData<typeof loader>();
+  const { processes: ProcessesList } = useLoaderData<typeof loader>();
   const [asd, setAsd] = useState<string>("processes");
 
   return (
@@ -70,7 +71,9 @@ export default function FoundProcesses() {
             </Coluna>
           </Linha>
         </Linha>
-        {asd === "processes" ? <ProcessesTable clients={ClientsList} /> : null}
+        {asd === "processes" ? (
+          <ProcessesTable processes={ProcessesList} />
+        ) : null}
         {asd === "clients" ? <ClientTable clients={ClientsList} /> : null}
 
         <Linha className=" items-center justify-center pt-9 text-sm font-medium font-inter">
