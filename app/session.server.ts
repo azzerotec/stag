@@ -69,10 +69,14 @@ export async function requireUser(request: Request) {
 export async function requireSubscription(request: Request) {
   const user = await requireUser(request);
 
-  if (user && user.subscriptionId)
-    return { user, subscriptionId: user.subscriptionId };
+  if (process.env.PAYMENT_FLOW) {
+    if (user && user.subscriptionId)
+      return { user, subscriptionId: user.subscriptionId };
+  } else {
+    if (user) return { user };
+  }
 
-  throw redirect(`/subscription`);
+  throw checkFeatureFlagBeforeRedirect(request, `/subscription`);
 }
 
 export async function requireActiveSubscription(request: Request) {
@@ -85,7 +89,7 @@ export async function requireActiveSubscription(request: Request) {
     if (user) return { user };
   }
 
-  throw redirect(checkFeatureFlagBeforeRedirect(`/subscription/invalid`));
+  throw checkFeatureFlagBeforeRedirect(request, `/subscription`);
 }
 
 export async function createUserSession({

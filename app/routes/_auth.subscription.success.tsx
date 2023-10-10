@@ -8,5 +8,5 @@ export const loader = async ({ request }: LoaderArgs) => {
 
   if (subscription.status === "active") return redirect("/");
 
-  return redirect("/subscription/invalid");
+  return redirect("/subscription");
 };
