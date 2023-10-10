@@ -8,8 +8,7 @@ import { getUser } from "~/session.server";
 export const loader = async ({ request }: LoaderArgs) => {
   const user = await getUser(request);
 
-  if (user && user.subscriptionActive) return redirect("/");
-  // if (user && user.subscriptionId) return redirect("/subscription");
+  if (user && user.subscriptionStatus === "active") return redirect("/");
 
   return json({ ok: true });
 };

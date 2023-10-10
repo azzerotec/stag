@@ -1,4 +1,4 @@
-import { json, redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
@@ -6,116 +6,30 @@ import { Button } from "~/components/Button";
 import { TermsOfUse } from "~/components/TermsOfUse";
 import { TextInput } from "~/components/TextInput";
 import { LogoStag } from "~/images/icons/LogoStag";
-import { createUser, getUserByEmail } from "~/models/user.server";
-import { createUserSession, getUser } from "~/session.server";
-import { safeRedirect, validateEmail, validateText } from "~/utils";
+import { createUser } from "~/models/user.server";
+import { createUserSession } from "~/session.server";
+import { checkForSubscription } from "~/utils/redirection";
+import {
+  getFormData,
+  validateRegisterForm,
+} from "~/utils/registerFormValidation";
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const user = await getUser(request);
+  const hasPreviousSession = await checkForSubscription(request);
 
-  if (user && user.priceId) redirect("/payment");
-  if (user) return redirect("/plan-selection");
+  console.log(hasPreviousSession);
+  if (hasPreviousSession) return hasPreviousSession;
 
   return json({ ok: true });
 };
 
 export const action = async ({ request }: ActionArgs) => {
-  const formData = await request.formData();
-  const oab = formData.get("oab");
-  const name = formData.get("name");
-  const email = formData.get("email");
-  const password = formData.get("password");
-  const redirectTo = safeRedirect(
-    formData.get("redirectTo"),
-    "/plan-selection"
-  );
+  const { redirectTo, ...jsonData } = await getFormData(request);
+  const { errors, data } = await validateRegisterForm(jsonData);
 
-  if (!validateText(oab)) {
-    return json(
-      {
-        errors: {
-          oab: "OAB is invalid",
-          password: null,
-          email: null,
-          name: null,
-        },
-      },
-      { status: 400 }
-    );
-  }
+  if (!data) return json({ errors }, { status: 400 });
 
-  if (!validateText(name)) {
-    return json(
-      {
-        errors: {
-          name: "Name is invalid",
-          password: null,
-          email: null,
-          oab: null,
-        },
-      },
-      { status: 400 }
-    );
-  }
-
-  if (!validateEmail(email)) {
-    return json(
-      {
-        errors: {
-          email: "Email is invalid",
-          password: null,
-          oab: null,
-          name: null,
-        },
-      },
-      { status: 400 }
-    );
-  }
-
-  if (typeof password !== "string" || password.length === 0) {
-    return json(
-      {
-        errors: {
-          email: null,
-          password: "Password is required",
-          oab: null,
-          name: null,
-        },
-      },
-      { status: 400 }
-    );
-  }
-
-  if (password.length < 8) {
-    return json(
-      {
-        errors: {
-          email: null,
-          password: "Password is too short",
-          oab: null,
-          name: null,
-        },
-      },
-      { status: 400 }
-    );
-  }
-
-  const existingUser = await getUserByEmail(email);
-  if (existingUser) {
-    return json(
-      {
-        errors: {
-          email: "A user already exists with this email",
-          password: null,
-          oab: null,
-          name: null,
-        },
-      },
-      { status: 400 }
-    );
-  }
-
-  const user = await createUser(oab, name, email, password);
+  const user = await createUser(data.oab, data.name, data.email, data.password);
 
   return createUserSession({
     redirectTo,
