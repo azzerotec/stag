@@ -1,6 +1,6 @@
 import { getUserByEmail } from "~/models/user.server";
 import { validateEmail, validateText } from "~/utils";
-import { checkFeatureFlagBeforeRedirect } from "./redirection";
+import { checkFeatureFlagBeforeRedirect } from "./redirectWhenActiveSession";
 
 type Errors = {
   oab: string | null;

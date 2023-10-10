@@ -1,5 +1,5 @@
 import { json } from "@remix-run/node";
-import type { ActionArgs, LoaderArgs } from "@remix-run/node";
+import type { ActionArgs } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "~/components/Button";
@@ -8,20 +8,12 @@ import { TextInput } from "~/components/TextInput";
 import { LogoStag } from "~/images/icons/LogoStag";
 import { createUser } from "~/models/user.server";
 import { createUserSession } from "~/session.server";
-import { checkForSubscription } from "~/utils/redirection";
 import {
   getFormData,
   validateRegisterForm,
 } from "~/utils/registerFormValidation";
 
-export const loader = async ({ request }: LoaderArgs) => {
-  const hasPreviousSession = await checkForSubscription(request);
-
-  console.log(hasPreviousSession);
-  if (hasPreviousSession) return hasPreviousSession;
-
-  return json({ ok: true });
-};
+export { loader } from "~/utils/redirectWhenActiveSession";
 
 export const action = async ({ request }: ActionArgs) => {
   const { redirectTo, ...jsonData } = await getFormData(request);
