@@ -11,11 +11,7 @@ const stripePromise = loadStripe(
   "pk_test_51NkX8oA5cU636bqzPTCEtxxE8l2G1rPMPnYZRIuyLYLSzjrpTkKmaFpyaHmaxy3gzzk5C4HaunHonNWPa8ojuxmU00lkEdMvCd"
 );
 
-export const loader = async ({ request }: LoaderArgs) => {
-  return json({
-    plans,
-  });
-};
+export const loader = async ({ request }: LoaderArgs) => json({ plans });
 
 export default function CardRegister() {
   const { plans } = useLoaderData<typeof loader>();

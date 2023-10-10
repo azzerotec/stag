@@ -3,6 +3,7 @@ import invariant from "tiny-invariant";
 
 import type { User } from "~/models/user.server";
 import { getUserById } from "~/models/user.server";
+import { checkFeatureFlagBeforeRedirect } from "./utils/redirectWhenActiveSession";
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
@@ -77,12 +78,14 @@ export async function requireSubscription(request: Request) {
 export async function requireActiveSubscription(request: Request) {
   const { user } = await requireSubscription(request);
 
-  console.log(user);
+  if (process.env.PAYMENT_FLOW) {
+    if (user && user.subscriptionStatus === "active")
+      return { user, subscriptionStatus: user.subscriptionStatus };
+  } else {
+    if (user) return { user };
+  }
 
-  if (user && user.subscriptionStatus === "active")
-    return { user, subscriptionStatus: user.subscriptionStatus };
-
-  throw redirect(`/subscription/invalid`);
+  throw redirect(checkFeatureFlagBeforeRedirect(`/subscription/invalid`));
 }
 
 export async function createUserSession({

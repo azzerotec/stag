@@ -8,7 +8,11 @@ import { getUser } from "~/session.server";
 export const loader = async ({ request }: LoaderArgs) => {
   const user = await getUser(request);
 
-  if (user && user.subscriptionStatus === "active") return redirect("/");
+  if (process.env.PAYMENT_FLOW) {
+    if (user && user.subscriptionStatus === "active") return redirect("/");
+  } else {
+    if (user) return redirect("/");
+  }
 
   return json({ ok: true });
 };

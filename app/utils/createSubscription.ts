@@ -1,9 +1,9 @@
-import type { SubscriptionData } from "~/routes/create-subscription";
+import type { SubscriptionData } from "~/routes/api/create-subscription";
 
 export async function createSubscription(
   priceId: string
 ): Promise<SubscriptionData> {
-  const response = await fetch("/create-subscription", {
+  const response = await fetch("/api/create-subscription", {
     method: "POST",
     headers: {
       "content-type": "application/json;charset=UTF-8",
