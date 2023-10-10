@@ -1,10 +1,10 @@
 import { createCookieSessionStorage, redirect } from "@remix-run/node";
-import invariant from "tiny-invariant";
 
 import type { User } from "~/models/user.server";
 import { getUserById } from "~/models/user.server";
+import { checkFeatureFlagBeforeRedirect } from "./utils/redirectWhenActiveSession";
 
-invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
+if (!process.env.SESSION_SECRET) throw new Error("SESSION_SECRET must be set");
 
 export const sessionStorage = createCookieSessionStorage({
   cookie: {
@@ -47,20 +47,48 @@ export async function requireUserId(
   redirectTo: string = new URL(request.url).pathname
 ) {
   const userId = await getUserId(request);
+
   if (!userId) {
     const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
     throw redirect(`/login?${searchParams}`);
   }
+
   return userId;
 }
 
 export async function requireUser(request: Request) {
   const userId = await requireUserId(request);
-
   const user = await getUserById(userId);
+
   if (user) return user;
 
   throw await logout(request);
+}
+
+export async function requireSubscription(request: Request) {
+  const user = await requireUser(request);
+
+  if (process.env.PAYMENT_FLOW) {
+    if (user && user.subscriptionId)
+      return { user, subscriptionId: user.subscriptionId };
+  } else {
+    if (user) return { user };
+  }
+
+  throw checkFeatureFlagBeforeRedirect(request, `/subscription`);
+}
+
+export async function requireActiveSubscription(request: Request) {
+  const { user } = await requireSubscription(request);
+
+  if (process.env.PAYMENT_FLOW) {
+    if (user && user.subscriptionStatus === "active")
+      return { user, subscriptionStatus: user.subscriptionStatus };
+  } else {
+    if (user) return { user };
+  }
+
+  throw checkFeatureFlagBeforeRedirect(request, `/subscription`);
 }
 
 export async function createUserSession({

@@ -38,7 +38,7 @@ export const DesktopSidebar = ({ navigation }: Props) => (
               <span aria-hidden="true">Tom Cook</span>
             </Link>
             <Link to="logout" className="rounded-md p-2 hover:bg-gray-800">
-              <span>logout</span>
+              logout
             </Link>
           </div>
         </li>

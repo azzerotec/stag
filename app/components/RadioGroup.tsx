@@ -1,17 +1,25 @@
-import { useState } from "react";
 import { RadioGroup as HeadlessuiRadioGroup } from "@headlessui/react";
+import type { Plan } from "~/models/plan.server";
+
+type Props = {
+  settings: Plan[];
+  name?: string;
+  plan: Plan["priceId"];
+  onChange: (plan: Plan["priceId"]) => void;
+};
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-type Setting = { name: string; description: string; plan: string };
-
-export const RadioGroup = ({ settings }: { settings: Setting[] }) => {
-  const [selected, setSelected] = useState(settings[0]);
-
+export const RadioGroup = ({ settings, name, onChange, plan }: Props) => {
   return (
-    <HeadlessuiRadioGroup value={selected} onChange={setSelected}>
+    <HeadlessuiRadioGroup
+      value={plan}
+      onChange={onChange}
+      name={name}
+      className="mb-4"
+    >
       <HeadlessuiRadioGroup.Label className="sr-only">
         Privacy setting
       </HeadlessuiRadioGroup.Label>
@@ -19,7 +27,7 @@ export const RadioGroup = ({ settings }: { settings: Setting[] }) => {
         {settings.map((setting) => (
           <HeadlessuiRadioGroup.Option
             key={setting.name}
-            value={setting}
+            value={setting.priceId}
             className={({ checked }) =>
               classNames(
                 checked
@@ -62,16 +70,6 @@ export const RadioGroup = ({ settings }: { settings: Setting[] }) => {
                     )}
                   >
                     {setting.description}
-                  </HeadlessuiRadioGroup.Description>
-
-                  <HeadlessuiRadioGroup.Description
-                    as="span"
-                    className={classNames(
-                      checked ? "text-a424A57" : "text-gray-500",
-                      "block text-sm font-inter"
-                    )}
-                  >
-                    {setting.plan}
                   </HeadlessuiRadioGroup.Description>
                 </span>
               </>

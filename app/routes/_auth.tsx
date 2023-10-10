@@ -1,13 +1,19 @@
-import type { LoaderArgs } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 import { BackgroundImage } from "~/components/BackgroundImage";
 import { Coluna, Linha } from "~/components/auxiliares";
-import { getUserId } from "~/session.server";
+import type { LoaderArgs } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+import { getUser } from "~/session.server";
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const userId = await getUserId(request);
-  if (userId) return redirect("/");
+  const user = await getUser(request);
+
+  if (process.env.PAYMENT_FLOW) {
+    if (user && user.subscriptionStatus === "active") return redirect("/");
+  } else {
+    if (user) return redirect("/");
+  }
+
   return json({ ok: true });
 };
 

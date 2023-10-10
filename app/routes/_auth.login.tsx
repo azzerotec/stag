@@ -1,56 +1,25 @@
-import { json } from "@remix-run/node";
-import type { ActionArgs } from "@remix-run/node";
+import { json, type ActionArgs } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import { TextInput } from "~/components/TextInput";
 import { Linha } from "~/components/auxiliares";
 import { LogoStag } from "~/images/icons/LogoStag";
-import { verifyLogin } from "~/models/user.server";
 import { createUserSession } from "~/session.server";
-import { safeRedirect, validateEmail } from "~/utils";
+import { getFormData, validateForm } from "~/utils/form/login";
+
+export { loader } from "~/utils/redirectWhenActiveSession";
 
 export const action = async ({ request }: ActionArgs) => {
-  const formData = await request.formData();
-  const email = formData.get("email");
-  const password = formData.get("password");
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
-  const remember = formData.get("remember");
+  const { redirectTo, remember, ...jsonData } = await getFormData(request);
+  const { errors, data } = await validateForm(jsonData);
 
-  if (!validateEmail(email)) {
-    return json(
-      { errors: { email: "Email is invalid", password: null } },
-      { status: 400 }
-    );
-  }
-
-  if (typeof password !== "string" || password.length === 0) {
-    return json(
-      { errors: { email: null, password: "Password is required" } },
-      { status: 400 }
-    );
-  }
-
-  if (password.length < 8) {
-    return json(
-      { errors: { email: null, password: "Password is too short" } },
-      { status: 400 }
-    );
-  }
-
-  const user = await verifyLogin(email, password);
-
-  if (!user) {
-    return json(
-      { errors: { email: "Invalid email or password", password: null } },
-      { status: 400 }
-    );
-  }
+  if (!data) return json({ errors }, { status: 400 });
 
   return createUserSession({
     redirectTo,
     remember: remember === "on" ? true : false,
     request,
-    userId: user.id,
+    userId: data.id,
   });
 };
 
