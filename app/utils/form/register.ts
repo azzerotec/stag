@@ -1,6 +1,5 @@
 import { getUserByEmail } from "~/models/user.server";
-import { validateEmail, validateText } from "~/utils";
-import { checkFeatureFlagBeforeRedirect } from "./redirectWhenActiveSession";
+import { safeRedirect, validateEmail, validateText } from "~/utils";
 
 type Errors = {
   oab: string | null;
@@ -18,7 +17,7 @@ type Form = {
 
 export const getFormData = async (request: Request) => {
   const formData = await request.formData();
-  const redirectTo = checkFeatureFlagBeforeRedirect(formData.get("redirectTo"));
+  const redirectTo = safeRedirect(formData.get("redirectTo"));
 
   const oab = formData.get("oab");
   const name = formData.get("name");

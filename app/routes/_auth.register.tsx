@@ -8,10 +8,7 @@ import { TextInput } from "~/components/TextInput";
 import { LogoStag } from "~/images/icons/LogoStag";
 import { createUser } from "~/models/user.server";
 import { createUserSession } from "~/session.server";
-import {
-  getFormData,
-  validateRegisterForm,
-} from "~/utils/registerFormValidation";
+import { getFormData, validateRegisterForm } from "~/utils/form/register";
 
 export { loader } from "~/utils/redirectWhenActiveSession";
 
