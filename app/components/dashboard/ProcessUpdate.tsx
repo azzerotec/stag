@@ -19,7 +19,7 @@ export const UpdatesSection = ({ updates }: UpdatesSectionProps) => {
 
   return (
     <>
-      <Coluna className="p-8">
+      <Coluna className="my-6">
         <h2 className="font-roboto text-xl font-black leading-4 text-a374151">
           Atualização de processos ajuizados {"(Push)"}
         </h2>

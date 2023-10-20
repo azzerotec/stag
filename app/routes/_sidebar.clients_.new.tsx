@@ -1,11 +1,13 @@
 import { UserCircleIcon } from "@heroicons/react/24/solid";
+import { Form } from "@remix-run/react";
+import { Button, GhostButton } from "~/components/Button";
 import { TextInput } from "~/components/TextInput";
 import { Coluna, Linha } from "~/components/auxiliares";
 
 export default function NewClient() {
   return (
-    <>
-      <Coluna className="overflow-y-auto">
+    <Form className="flex grow flex-col overflow-hidden">
+      <Coluna className="overflow-y-auto overflow-x-hidden">
         <Linha className="p-6">
           <div className="col-span-full">
             <label
@@ -197,6 +199,14 @@ export default function NewClient() {
           </form>
         </Linha>
       </Coluna>
-    </>
+      <Linha className="justify-end border-t-2 px-16 py-6">
+        <div className="mr-6 w-28">
+          <GhostButton>Cancelar</GhostButton>
+        </div>
+        <div className="w-20">
+          <Button>Salvar</Button>
+        </div>
+      </Linha>
+    </Form>
   );
 }
