@@ -10,7 +10,7 @@ import { getClients } from "~/models/client.server";
 import { getProcesses } from "~/models/process.server";
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const clients = getClients();
+  const clients = await getClients();
   const processes = getProcesses();
   //const userId = await getUserId(request);
   //if (userId) return redirect("/");
