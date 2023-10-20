@@ -11,7 +11,6 @@ import { getProcesses } from "~/models/process.server";
 
 export const loader = async ({ request }: LoaderArgs) => {
   const clients = await getClients();
-  console.log(clients);
   const processes = getProcesses();
   //const userId = await getUserId(request);
   //if (userId) return redirect("/");
