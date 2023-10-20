@@ -37,7 +37,7 @@ model Password {
 model Processo {
   id           String         @id @default(cuid())
   numero       String
-  cliente      Cliente        @relation(fields: [clienteId], references: [id])
+  cliente      Client         @relation(fields: [clienteId], references: [id])
   data         DateTime
   clienteId    String
   notificacoes Notificacoes[]
@@ -49,7 +49,7 @@ model Evento {
   descricao String
   local     String
   data      DateTime
-  cliente   Cliente  @relation(fields: [clienteId], references: [id])
+  cliente   Client   @relation(fields: [clienteId], references: [id])
   clienteId String
 }
 
@@ -79,7 +79,7 @@ model NotificationType {
 model Notificacoes {
   id                 String           @id @default(cuid())
   processo           Processo         @relation(fields: [processoId], references: [id])
-  cliente            Cliente          @relation(fields: [clienteId], references: [id])
+  cliente            Client           @relation(fields: [clienteId], references: [id])
   titulo             String
   descricao          String
   data               DateTime
@@ -90,22 +90,40 @@ model Notificacoes {
   notificationTypeId String
 }
 
-model Cliente {
-  id                       String                   @id @default(cuid())
-  contato                  String
-  endereco                 String
-  email                    String
+model Client {
+  id String @id @default(cuid())
+
   pessoaFisica             PessoaFisica?
   pessoaJuridica           PessoaJuridica?
   Processo                 Processo[]
   Evento                   Evento[]
   notificacoes             Notificacoes[]
   movimentacoesFinanceiras MovimentacaoFinanceira[]
+
+  name                String
+  email               String
+  cpf                 String
+  rg                  String
+  birthdate           DateTime
+  nationality         String
+  personalContact     String
+  professionalContact String
+  engaged             String
+  profession          String
+
+  cep            String?
+  city           String?
+  neighborhood   String?
+  province       String?
+  streetAddress  String?
+  streetAddress2 String?
+
+  @@map("Cliente")
 }
 
 model PessoaFisica {
-  id            String  @id @default(cuid())
-  cliente       Cliente @relation(fields: [clienteId], references: [id])
+  id            String @id @default(cuid())
+  cliente       Client @relation(fields: [clienteId], references: [id])
   nomeCompleto  String
   rg            String
   nascimento    String
@@ -114,15 +132,15 @@ model PessoaFisica {
   profissao     String
   nomeDaMae     String
   nomeDoPai     String
-  clienteId     String  @unique
+  clienteId     String @unique
 }
 
 model PessoaJuridica {
-  id               String  @id @default(cuid())
-  cliente          Cliente @relation(fields: [clienteId], references: [id])
+  id               String @id @default(cuid())
+  cliente          Client @relation(fields: [clienteId], references: [id])
   razaoSocial      String // Imagem
   responsavelLegal String
-  clienteId        String  @unique
+  clienteId        String @unique
 }
 
 model MovimentacaoFinanceiraTipo {
@@ -133,7 +151,7 @@ model MovimentacaoFinanceiraTipo {
 
 model MovimentacaoFinanceira {
   id        String                     @id @default(cuid())
-  cliente   Cliente                    @relation(fields: [clienteId], references: [id])
+  cliente   Client                     @relation(fields: [clienteId], references: [id])
   valor     String
   data      DateTime
   discricao String

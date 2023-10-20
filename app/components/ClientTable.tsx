@@ -1,9 +1,9 @@
-import type { Client } from "~/models/client.server";
+import type { ClientListItem } from "~/models/client.server";
 import { Linha } from "./auxiliares";
 import { EmptyListDashboard } from "./EmptyListDashBoard";
 import { ListClientsFound } from "./ListClientsFound";
 
-export const ClientTable = ({ clients }: { clients: Client[] }) => {
+export const ClientTable = ({ clients }: { clients: ClientListItem[] }) => {
   return (
     <>
       <Linha className="mt-8 border-b text-xs font-extrabold font-inter">
@@ -29,7 +29,7 @@ export const ClientTable = ({ clients }: { clients: Client[] }) => {
         {clients.length === 0 ? (
           <EmptyListDashboard />
         ) : (
-          clients.map((client: Client) => (
+          clients.map((client: ClientListItem) => (
             <ListClientsFound client={client} key={client.cpf} />
           ))
         )}

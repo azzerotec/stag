@@ -1,12 +1,30 @@
 import { UserCircleIcon } from "@heroicons/react/24/solid";
-import { Form } from "@remix-run/react";
+import { json, type ActionArgs, redirect } from "@remix-run/node";
+import { Form, Link } from "@remix-run/react";
 import { Button, GhostButton } from "~/components/Button";
 import { TextInput } from "~/components/TextInput";
 import { Coluna, Linha } from "~/components/auxiliares";
+import { createClient } from "~/models/client.server";
+import { getFormData, validateRegisterForm } from "~/utils/form/client";
+
+export const action = async ({ request }: ActionArgs) => {
+  const jsonData = await getFormData(request);
+  const { errors, data } = await validateRegisterForm(jsonData);
+
+  if (!data) return json({ errors }, { status: 400 });
+
+  try {
+    await createClient(data);
+  } catch (error) {
+    return json({ error }, { status: 400 });
+  }
+
+  return redirect("/clients");
+};
 
 export default function NewClient() {
   return (
-    <Form className="flex grow flex-col overflow-hidden">
+    <Form className="flex grow flex-col overflow-hidden" method="POST">
       <Coluna className="overflow-y-auto overflow-x-hidden">
         <Linha className="p-6">
           <div className="col-span-full">
@@ -70,22 +88,38 @@ export default function NewClient() {
             <p className="mt-1 text-sm leading-6 text-gray-600">Description</p>
           </Coluna>
 
-          <form className=" ml-20">
-            <TextInput label="Nome Completo" className="mt-6" />
+          <div className="ml-20">
+            <TextInput label="Nome Completo" className="mt-6" name="name" />
             <Linha className="gap-x-6">
-              <TextInput label="CPF" className="mt-6" />
-              <TextInput label="RG " className="mt-6" />
-              <TextInput label="Data de nascimento" className="mt-6" />
-              <TextInput label="Naturalidade" className="mt-6" />
+              <TextInput label="CPF" className="mt-6" name="cpf" />
+              <TextInput label="RG " className="mt-6" name="rg" />
+              <TextInput
+                label="Data de nascimento"
+                className="mt-6"
+                name="birthdate"
+              />
+              <TextInput
+                label="Naturalidade"
+                className="mt-6"
+                name="nationality"
+              />
             </Linha>
-            <TextInput label="Email" className="mt-6" />
+            <TextInput label="Email" className="mt-6" name="email" />
             <Linha className="gap-x-6">
-              <TextInput label="Contato(Pessoal)" className="mt-6" />
-              <TextInput label="Contato(Profissional)" className="mt-6" />
-              <TextInput label="Estado Civil" className="mt-6" />
+              <TextInput
+                label="Contato(Pessoal)"
+                className="mt-6"
+                name="personalContact"
+              />
+              <TextInput
+                label="Contato(Profissional)"
+                className="mt-6"
+                name="professionalContact"
+              />
+              <TextInput label="Estado Civil" className="mt-6" name="engaged" />
             </Linha>
-            <TextInput label="Profissão" className="mt-6" />
-          </form>
+            <TextInput label="Profissão" className="mt-6" name="profession" />
+          </div>
         </Linha>
 
         <Linha className="border-b-2 p-6">
@@ -96,9 +130,9 @@ export default function NewClient() {
             <p className="mt-1 text-sm leading-6 text-gray-600">Description</p>
           </Coluna>
 
-          <form className=" ml-20">
+          <div className=" ml-20">
             <TextInput label="Description" className="w- mt-6" />
-          </form>
+          </div>
         </Linha>
 
         <Linha className="border-b-2 p-6">
@@ -133,7 +167,7 @@ export default function NewClient() {
             </p>
           </Coluna>
 
-          <form className=" ml-20">
+          <div className=" ml-20">
             <Linha className="gap-6">
               <div className="flex items-center gap-x-2">
                 <input
@@ -170,7 +204,7 @@ export default function NewClient() {
               <TextInput label="Conta " className="mt-6" />
             </Linha>
             <TextInput label="Pix" className="mt-6" />
-          </form>
+          </div>
         </Linha>
 
         <Linha className="border-b-2 p-6">
@@ -183,7 +217,7 @@ export default function NewClient() {
               what else you want to hear about.
             </p>
           </Coluna>
-          <form className=" ml-20 grow">
+          <div className=" ml-20 grow">
             <Linha className="gap-x-6">
               <TextInput label="PIS" className="mt-6" />
               <TextInput label="CTPS " className="mt-6" />
@@ -196,12 +230,14 @@ export default function NewClient() {
               <TextInput label="Passaporte" className="mt-6" />
               <TextInput label="Certidão de reservista " className="mt-6" />
             </Linha>
-          </form>
+          </div>
         </Linha>
       </Coluna>
       <Linha className="justify-end border-t-2 px-16 py-6">
         <div className="mr-6 w-28">
-          <GhostButton>Cancelar</GhostButton>
+          <Link to="/clients">
+            <GhostButton>Cancelar</GhostButton>
+          </Link>
         </div>
         <div className="w-20">
           <Button>Salvar</Button>

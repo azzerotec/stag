@@ -1,12 +1,12 @@
-import type { Client } from "~/models/client.server";
+import type { ClientListItem } from "~/models/client.server";
 import { Linha } from "./auxiliares";
 
 type Props = {
-  client: Client;
+  client: ClientListItem;
 };
 
 export const ListClientsFound = ({
-  client: { name, cpf, phoneNumber, province },
+  client: { name, cpf, personalContact, province },
 }: Props) => (
   <Linha className="border-b text-sm font-inter">
     <span className="flex h-14 w-64 items-center p-2 align-middle font-medium text-gray-900">
@@ -16,7 +16,7 @@ export const ListClientsFound = ({
       {cpf}
     </span>
     <span className="flex h-14 w-80 items-center p-2 align-middle text-gray-500">
-      {phoneNumber}
+      {personalContact}
     </span>
     <Linha className="flex h-14 w-36 items-center p-2 align-middle text-gray-500">
       <span className="ml-2">{province}</span>
