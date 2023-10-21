@@ -23,7 +23,7 @@ const Shortcut = ({ icon, name }: Props) => {
 
 export const QuickActions = () => {
   return (
-    <Coluna className="m-6">
+    <Coluna className="my-6">
       <h2 className="text-xl font-black text-a374151 font-inter">
         Acesso Rapido
       </h2>

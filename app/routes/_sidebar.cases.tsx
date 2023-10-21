@@ -4,6 +4,7 @@ import { useLoaderData } from "@remix-run/react";
 import { ProcessesTable } from "~/components/ProcessesTable";
 import { TextInput } from "~/components/TextInput";
 import { Linha } from "~/components/auxiliares";
+import { Container } from "~/components/layout/Container";
 import { Search } from "~/images/icons/Search";
 import { getProcesses } from "~/models/process.server";
 
@@ -18,7 +19,7 @@ export default function ListClients() {
   const { processes: ProcessesList } = useLoaderData<typeof loader>();
 
   return (
-    <>
+    <Container>
       <Linha>
         <Linha className="grow">
           <h1 className="text-3xl  font-bold text-a374151 font-inter">
@@ -33,6 +34,6 @@ export default function ListClients() {
         </Linha>
       </Linha>
       <ProcessesTable processes={ProcessesList} />
-    </>
+    </Container>
   );
 }

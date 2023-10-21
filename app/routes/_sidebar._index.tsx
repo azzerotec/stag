@@ -6,6 +6,7 @@ import { SummaryDay } from "~/components/dashboard/SummaryDay";
 import { Coluna, Linha } from "~/components/auxiliares";
 import { getUpdatesByCourt } from "~/models/update.server";
 import { getDailySummary } from "~/models/dailySummary";
+import { Container } from "~/components/layout/Container";
 
 export const loader = () => {
   const updates = getUpdatesByCourt();
@@ -21,7 +22,7 @@ export default function Dashboard() {
   const { updates, dailySummary } = useLoaderData<typeof loader>();
 
   return (
-    <>
+    <Container>
       <Linha>
         <Coluna className="w-1/2">
           <QuickActions />
@@ -31,6 +32,6 @@ export default function Dashboard() {
           <SummaryDay dailySummary={dailySummary} />
         </Coluna>
       </Linha>
-    </>
+    </Container>
   );
 }

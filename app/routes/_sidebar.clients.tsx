@@ -4,12 +4,13 @@ import { Link, useLoaderData } from "@remix-run/react";
 import { ClientTable } from "~/components/ClientTable";
 import { TextInput } from "~/components/TextInput";
 import { Linha } from "~/components/auxiliares";
+import { Container } from "~/components/layout/Container";
 import { Search } from "~/images/icons/Search";
 import { getClients } from "~/models/client.server";
 import { getProcesses } from "~/models/process.server";
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const clients = getClients();
+  const clients = await getClients();
   const processes = getProcesses();
   //const userId = await getUserId(request);
   //if (userId) return redirect("/");
@@ -20,7 +21,7 @@ export default function ListClients() {
   const { clients: ClientsList } = useLoaderData<typeof loader>();
 
   return (
-    <>
+    <Container>
       <Linha>
         <Linha className="grow">
           <h1 className="text-3xl  font-bold text-a374151 font-inter">
@@ -38,6 +39,6 @@ export default function ListClients() {
         </Linha>
       </Linha>
       <ClientTable clients={ClientsList} />
-    </>
+    </Container>
   );
 }
