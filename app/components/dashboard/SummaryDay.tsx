@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Coluna, Linha } from "../layout/Flex";
-import { EmptyList } from "../EmptyList";
+import { EmptyUpdateList } from "../EmptyUpdateList";
 import { Select } from "../Select";
 import { DatePicker } from "../DatePicker";
 import type { DailySummaryItem } from "~/models/dailySummary";
@@ -106,7 +106,7 @@ export const SummaryDay = ({ dailySummary }: Props) => {
 
       <div className="font-interç ml-10 mt-2 rounded-sm border bg-white p-4 shadow-lg">
         {dailySummary.length === 0 ? (
-          <EmptyList />
+          <EmptyUpdateList />
         ) : (
           dailySummary.map(({ content, date, status, title, type }) => (
             <List

@@ -1,4 +1,4 @@
-export const EmptyListIlustration = () => (
+export const EmptyUpdateListIlustration = () => (
   <svg
     width="200"
     height="200"

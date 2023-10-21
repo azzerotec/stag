@@ -1,5 +1,10 @@
 import type { ClientListItem } from "~/models/client.server";
 import { Linha } from "./layout/Flex";
+import {
+  ArchiveBoxArrowDownIcon,
+  InformationCircleIcon,
+  PencilIcon,
+} from "@heroicons/react/24/outline";
 
 type Props = {
   client: ClientListItem;
@@ -22,7 +27,11 @@ export const ListClientsFound = ({
       <span className="ml-2">{province}</span>
     </Linha>
     <div className="flex grow items-center align-middle">
-      <span className="h-7 w-7 text-a6B7280">TrashIcon</span>
+      <Linha className="gap-3 text-a6B7280">
+        <PencilIcon className="h-4 w-4" />
+        <ArchiveBoxArrowDownIcon className="h-4 w-4" />
+        <InformationCircleIcon className="h-4 w-4" />
+      </Linha>
     </div>
   </Linha>
 );

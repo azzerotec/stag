@@ -1,10 +1,10 @@
 import { Coluna } from "./layout/Flex";
-import { EmptyListIlustration } from "~/images/EmptyListIlustration";
+import { EmptyUpdateListIlustration } from "~/images/EmptyUpdateListIlustration";
 
-export const EmptyList = () => (
+export const EmptyUpdateList = () => (
   <Coluna className="grow justify-center ">
     <div className="my-8">
-      <EmptyListIlustration />
+      <EmptyUpdateListIlustration />
     </div>
     <span className="font-roboto text-sm font-extralight">
       Você não possui nenhuma atualização de processos ajuizados.

@@ -1,6 +1,6 @@
 import type { ClientListItem } from "~/models/client.server";
 import { Linha } from "./layout/Flex";
-import { EmptyListDashboard } from "./EmptyListDashBoard";
+import { EmptyClientList } from "./EmptyClientList";
 import { ListClientsFound } from "./ListClientsFound";
 
 export const ClientTable = ({ clients }: { clients: ClientListItem[] }) => {
@@ -27,7 +27,7 @@ export const ClientTable = ({ clients }: { clients: ClientListItem[] }) => {
         }}
       >
         {clients.length === 0 ? (
-          <EmptyListDashboard />
+          <EmptyClientList />
         ) : (
           clients.map((client: ClientListItem) => (
             <ListClientsFound client={client} key={client.cpf} />

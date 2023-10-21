@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Coluna } from "../layout/Flex";
-import { EmptyList } from "../EmptyList";
+import { EmptyUpdateList } from "../EmptyUpdateList";
 import { Court } from "./CourtCard";
 import { UpdateList } from "./UpdateList";
 import type { CourtUpdates } from "~/models/update.server";
@@ -28,7 +28,7 @@ export const UpdatesSection = ({ updates }: UpdatesSectionProps) => {
         </span>
 
         {updates.length === 0 ? (
-          <EmptyList />
+          <EmptyUpdateList />
         ) : (
           <div className="mt-2 flex w-full gap-3 overflow-auto p-2">
             {updates.map(({ name, updates }) => (
