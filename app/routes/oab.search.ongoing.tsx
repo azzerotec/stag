@@ -1,6 +1,6 @@
 import { json, redirect } from "@remix-run/node";
 import type { LoaderArgs } from "@remix-run/node";
-import { Coluna } from "~/components/auxiliares";
+import { Coluna } from "~/components/layout/Flex";
 import { LogoStag } from "~/images/icons/LogoStag";
 import { Spinner } from "~/images/icons/Spinner";
 

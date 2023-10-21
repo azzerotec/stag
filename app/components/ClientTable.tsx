@@ -1,5 +1,5 @@
 import type { ClientListItem } from "~/models/client.server";
-import { Linha } from "./auxiliares";
+import { Linha } from "./layout/Flex";
 import { EmptyListDashboard } from "./EmptyListDashBoard";
 import { ListClientsFound } from "./ListClientsFound";
 

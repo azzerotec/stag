@@ -3,7 +3,7 @@ import { json, type ActionArgs, redirect } from "@remix-run/node";
 import { Form, Link } from "@remix-run/react";
 import { Button, GhostButton } from "~/components/Button";
 import { TextInput } from "~/components/TextInput";
-import { Coluna, Linha } from "~/components/auxiliares";
+import { Coluna, Linha } from "~/components/layout/Flex";
 import { createClient } from "~/models/client.server";
 import { getFormData, validateRegisterForm } from "~/utils/form/client";
 

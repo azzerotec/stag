@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Coluna } from "../auxiliares";
+import { Coluna } from "../layout/Flex";
 import { EmptyList } from "../EmptyList";
 import { Court } from "./CourtCard";
 import { UpdateList } from "./UpdateList";

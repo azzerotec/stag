@@ -3,7 +3,7 @@ import { useLoaderData } from "@remix-run/react";
 import { UpdatesSection } from "~/components/dashboard/ProcessUpdate";
 import { QuickActions } from "~/components/dashboard/QuickActions";
 import { SummaryDay } from "~/components/dashboard/SummaryDay";
-import { Coluna, Linha } from "~/components/auxiliares";
+import { Coluna, Linha } from "~/components/layout/Flex";
 import { getUpdatesByCourt } from "~/models/update.server";
 import { getDailySummary } from "~/models/dailySummary";
 import { Container } from "~/components/layout/Container";

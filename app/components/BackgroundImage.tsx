@@ -1,4 +1,4 @@
-import { Coluna } from "./auxiliares";
+import { Coluna } from "./layout/Flex";
 import background from "~/images/background.png";
 
 export const BackgroundImage = () => (

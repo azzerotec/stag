@@ -1,6 +1,6 @@
 import type { Process } from "~/models/process.server";
 import { ListProcessFound } from "./ListProcessFound";
-import { Linha } from "./auxiliares";
+import { Linha } from "./layout/Flex";
 
 export const ProcessesTable = ({ processes }: { processes: Process[] }) => {
   return (

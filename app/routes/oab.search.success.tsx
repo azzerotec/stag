@@ -4,7 +4,7 @@ import { Link, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import { ClientTable } from "~/components/ClientTable";
 import { ProcessesTable } from "~/components/ProcessesTable";
-import { Coluna, Linha } from "~/components/auxiliares";
+import { Coluna, Linha } from "~/components/layout/Flex";
 import { LogoStag } from "~/images/icons/LogoStag";
 import { getClients } from "~/models/client.server";
 import { getProcesses } from "~/models/process.server";

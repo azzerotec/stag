@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { ClientTable } from "~/components/ClientTable";
 import { TextInput } from "~/components/TextInput";
-import { Linha } from "~/components/auxiliares";
+import { Linha } from "~/components/layout/Flex";
 import { Container } from "~/components/layout/Container";
 import { Search } from "~/images/icons/Search";
 import { getClients } from "~/models/client.server";

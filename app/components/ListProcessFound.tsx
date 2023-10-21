@@ -1,5 +1,5 @@
 import type { Process } from "~/models/process.server";
-import { Linha } from "./auxiliares";
+import { Linha } from "./layout/Flex";
 
 type Props = {
   Processes: Process;

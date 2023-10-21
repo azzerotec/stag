@@ -2,7 +2,7 @@ import { json, type ActionArgs } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import { TextInput } from "~/components/TextInput";
-import { Linha } from "~/components/auxiliares";
+import { Linha } from "~/components/layout/Flex";
 import { LogoStag } from "~/images/icons/LogoStag";
 import { createUserSession } from "~/session.server";
 import { getFormData, validateForm } from "~/utils/form/login";

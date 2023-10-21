@@ -1,4 +1,4 @@
-import { Coluna } from "./auxiliares";
+import { Coluna } from "./layout/Flex";
 import { EmptyListIlustration } from "~/images/EmptyListIlustration";
 
 export const EmptyList = () => (

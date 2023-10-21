@@ -1,5 +1,5 @@
 import { EmptyListIlustrationDashBoard } from "~/images/icons/EmptyListIlustrationDashboard";
-import { Coluna } from "./auxiliares";
+import { Coluna } from "./layout/Flex";
 
 export const EmptyListDashboard = () => (
   <Coluna className="grow items-center justify-center align-middle">

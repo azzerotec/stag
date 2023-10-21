@@ -1,7 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import { Coluna, Linha } from "~/components/auxiliares";
+import { Coluna, Linha } from "~/components/layout/Flex";
 import { plans } from "~/models/plan.server";
 
 import { type LoaderArgs, json } from "@remix-run/node";

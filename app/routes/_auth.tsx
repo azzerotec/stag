@@ -1,6 +1,6 @@
 import { Outlet } from "@remix-run/react";
 import { BackgroundImage } from "~/components/BackgroundImage";
-import { Coluna, Linha } from "~/components/auxiliares";
+import { Coluna, Linha } from "~/components/layout/Flex";
 import type { LoaderArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { getUser } from "~/session.server";

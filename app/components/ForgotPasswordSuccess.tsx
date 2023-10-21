@@ -1,5 +1,5 @@
 import { Modal } from "./modal";
-import { Coluna } from "./auxiliares";
+import { Coluna } from "./layout/Flex";
 import { Button } from "./Button";
 
 export const ForgotPasswordSuccess = ({

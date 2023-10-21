@@ -2,7 +2,7 @@ import { json, redirect } from "@remix-run/node";
 import type { LoaderArgs } from "@remix-run/node";
 import { Button } from "~/components/Button";
 import { TextInput } from "~/components/TextInput";
-import { Coluna } from "~/components/auxiliares";
+import { Coluna } from "~/components/layout/Flex";
 import { LogoStag } from "~/images/icons/LogoStag";
 import { getUserId } from "~/session.server";
 

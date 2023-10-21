@@ -1,4 +1,4 @@
-import { Linha } from "../auxiliares";
+import { Linha } from "../layout/Flex";
 import type { Update } from "~/models/update.server";
 
 type ProcessUpdateProps = {

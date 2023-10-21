@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Coluna, Linha } from "../auxiliares";
+import { Coluna, Linha } from "../layout/Flex";
 import { EmptyList } from "../EmptyList";
 import { Select } from "../Select";
 import { DatePicker } from "../DatePicker";
