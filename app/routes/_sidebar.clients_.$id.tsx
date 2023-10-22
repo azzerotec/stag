@@ -1,20 +1,33 @@
 import { UserCircleIcon } from "@heroicons/react/24/solid";
-import { json, type ActionArgs, redirect } from "@remix-run/node";
-import { Form, Link } from "@remix-run/react";
+import { json, redirect } from "@remix-run/node";
+import type { LoaderArgs, ActionArgs } from "@remix-run/node";
+import { Form, Link, useLoaderData } from "@remix-run/react";
 import { Button, GhostButton } from "~/components/Button";
 import { TextInput } from "~/components/TextInput";
 import { Coluna, Linha } from "~/components/layout/Flex";
-import { createClient } from "~/models/client.server";
+import { createClient, getClient, updateClient } from "~/models/client.server";
 import { getFormData, validateRegisterForm } from "~/utils/form/client";
 
-export const action = async ({ request }: ActionArgs) => {
+export const loader = async ({ params }: LoaderArgs) => {
+  if (!params.id) return redirect("/clients");
+  if (params.id === "new") return json({ client: null });
+
+  const client = await getClient(params.id);
+  return json({ client });
+};
+
+export const action = async ({ request, params }: ActionArgs) => {
   const jsonData = await getFormData(request);
   const { errors, data } = await validateRegisterForm(jsonData);
 
   if (!data) return json({ errors }, { status: 400 });
 
   try {
-    await createClient(data);
+    if (params.id && params.id !== "new") {
+      await updateClient(data, params.id);
+    } else {
+      await createClient(data);
+    }
   } catch (error) {
     return json({ error }, { status: 400 });
   }
@@ -23,6 +36,8 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export default function NewClient() {
+  const { client } = useLoaderData<typeof loader>();
+
   return (
     <Form className="flex grow flex-col overflow-hidden" method="POST">
       <Coluna className="overflow-y-auto overflow-x-hidden">
@@ -89,36 +104,72 @@ export default function NewClient() {
           </Coluna>
 
           <div className="ml-20">
-            <TextInput label="Nome Completo" className="mt-6" name="name" />
+            <TextInput
+              label="Nome Completo"
+              className="mt-6"
+              name="name"
+              value={client?.name}
+            />
             <Linha className="gap-x-6">
-              <TextInput label="CPF" className="mt-6" name="cpf" />
-              <TextInput label="RG " className="mt-6" name="rg" />
+              <TextInput
+                label="CPF"
+                className="mt-6"
+                name="cpf"
+                value={client?.cpf}
+              />
+
+              <TextInput
+                label="RG "
+                className="mt-6"
+                name="rg"
+                value={client?.rg}
+              />
               <TextInput
                 label="Data de nascimento"
                 className="mt-6"
                 name="birthdate"
+                value={client?.birthdate}
               />
               <TextInput
                 label="Naturalidade"
                 className="mt-6"
                 name="nationality"
+                value={client?.nationality}
               />
             </Linha>
-            <TextInput label="Email" className="mt-6" name="email" />
+            <TextInput
+              label="Email"
+              className="mt-6"
+              name="email"
+              value={client?.email}
+            />
+
             <Linha className="gap-x-6">
               <TextInput
                 label="Contato(Pessoal)"
                 className="mt-6"
                 name="personalContact"
+                value={client?.personalContact}
               />
               <TextInput
                 label="Contato(Profissional)"
                 className="mt-6"
                 name="professionalContact"
+                value={client?.professionalContact}
               />
-              <TextInput label="Estado Civil" className="mt-6" name="engaged" />
+              <TextInput
+                label="Estado Civil"
+                className="mt-6"
+                name="engaged"
+                value={client?.engaged}
+              />
             </Linha>
-            <TextInput label="Profissão" className="mt-6" name="profession" />
+            <TextInput
+              label="Profissão"
+              className="mt-6"
+              name="profession"
+              value={client?.profession}
+            />
           </div>
         </Linha>
 

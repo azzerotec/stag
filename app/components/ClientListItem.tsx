@@ -1,4 +1,4 @@
-import type { ClientListItem } from "~/models/client.server";
+import type { Client } from "@prisma/client";
 import { Linha } from "./layout/Flex";
 import {
   ArchiveBoxArrowDownIcon,
@@ -7,10 +7,10 @@ import {
 } from "@heroicons/react/24/outline";
 
 type Props = {
-  client: ClientListItem;
+  client: Client;
 };
 
-export const ListClientsFound = ({
+export const ClientTableItem = ({
   client: { name, cpf, personalContact, province },
 }: Props) => (
   <Linha className="border-b text-sm font-inter">

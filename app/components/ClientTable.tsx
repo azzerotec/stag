@@ -1,9 +1,10 @@
-import type { ClientListItem } from "~/models/client.server";
 import { Linha } from "./layout/Flex";
 import { EmptyClientList } from "./EmptyClientList";
-import { ListClientsFound } from "./ListClientsFound";
+import { ClientTableItem } from "./ClientListItem";
+import { Link } from "@remix-run/react";
+import type { Client } from "@prisma/client";
 
-export const ClientTable = ({ clients }: { clients: ClientListItem[] }) => {
+export const ClientTable = ({ clients }: { clients: Client[] }) => {
   return (
     <>
       <Linha className="mt-8 border-b text-xs font-extrabold font-inter">
@@ -29,8 +30,10 @@ export const ClientTable = ({ clients }: { clients: ClientListItem[] }) => {
         {clients.length === 0 ? (
           <EmptyClientList />
         ) : (
-          clients.map((client: ClientListItem) => (
-            <ListClientsFound client={client} key={client.cpf} />
+          clients.map((client: Client) => (
+            <Link key={client.id} to={`/clients/${client.id}`}>
+              <ClientTableItem client={client} />
+            </Link>
           ))
         )}
       </div>
