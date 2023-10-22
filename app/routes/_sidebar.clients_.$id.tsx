@@ -176,6 +176,32 @@ export default function NewClient() {
         <Linha className="border-b-2 p-6">
           <Coluna className="w-64">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
+              Title
+            </h2>
+            <p className="mt-1 text-sm leading-6 text-gray-600">Description</p>
+          </Coluna>
+
+          <div className="ml-20">
+            <Linha className="gap-x-6">
+              <TextInput label="CEP" name="cep" className="mt-6" />
+              <TextInput label="Cidade" name="city" className="mt-6" />
+              <TextInput label="Bairro" name="neighborhood" className="mt-6" />
+            </Linha>
+            <TextInput label="Logradouro" name="province" className="mt-6" />
+            <Linha className="gap-x-6">
+              <TextInput label="Estado" name="streetAddress" className="mt-6" />
+              <TextInput
+                label="Complemento"
+                name="streetAddress2"
+                className="mt-6"
+              />
+            </Linha>
+          </div>
+        </Linha>
+
+        <Linha className="border-b-2 p-6">
+          <Coluna className="w-64">
+            <h2 className="text-base font-semibold leading-7 text-gray-900">
               Informações principais
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">Description</p>

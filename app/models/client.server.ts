@@ -21,12 +21,12 @@ export const createClient = async (data: {
   professionalContact: Client["professionalContact"];
   engaged: Client["engaged"];
   profession: Client["profession"];
-  // cep: Client["cep"];
-  // city: Client["city"];
-  // neighborhood: Client["neighborhood"];
-  // province: Client["province"];
-  // streetAddress: Client["streetAddress"];
-  // streetAddress2: Client["streetAddress2"];
+  cep: Client["cep"];
+  city: Client["city"];
+  neighborhood: Client["neighborhood"];
+  province: Client["province"];
+  streetAddress: Client["streetAddress"];
+  streetAddress2: Client["streetAddress2"];
 }) => {
   return prisma.client.create({
     data,
@@ -45,12 +45,12 @@ export const updateClient = async (
     professionalContact: Client["professionalContact"];
     engaged: Client["engaged"];
     profession: Client["profession"];
-    // cep: Client["cep"];
-    // city: Client["city"];
-    // neighborhood: Client["neighborhood"];
-    // province: Client["province"];
-    // streetAddress: Client["streetAddress"];
-    // streetAddress2: Client["streetAddress2"];
+    cep: Client["cep"];
+    city: Client["city"];
+    neighborhood: Client["neighborhood"];
+    province: Client["province"];
+    streetAddress: Client["streetAddress"];
+    streetAddress2: Client["streetAddress2"];
   },
   id: Client["id"]
 ) =>

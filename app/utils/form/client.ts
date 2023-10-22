@@ -11,12 +11,12 @@ type Errors = {
   professionalContact: string | null;
   engaged: string | null;
   profession: string | null;
-  // cep: string | null;
-  // city: string | null;
-  // neighborhood: string | null;
-  // province: string | null;
-  // streetAddress: string | null;
-  // streetAddress2: string | null;
+  cep: string | null;
+  city: string | null;
+  neighborhood: string | null;
+  province: string | null;
+  streetAddress: string | null;
+  streetAddress2: string | null;
 };
 
 type Form = {
@@ -30,12 +30,12 @@ type Form = {
   professionalContact: FormDataEntryValue | null;
   engaged: FormDataEntryValue | null;
   profession: FormDataEntryValue | null;
-  // cep: FormDataEntryValue | null;
-  // city: FormDataEntryValue | null;
-  // neighborhood: FormDataEntryValue | null;
-  // province: FormDataEntryValue | null;
-  // streetAddress: FormDataEntryValue | null;
-  // streetAddress2: FormDataEntryValue | null;
+  cep: FormDataEntryValue | null;
+  city: FormDataEntryValue | null;
+  neighborhood: FormDataEntryValue | null;
+  province: FormDataEntryValue | null;
+  streetAddress: FormDataEntryValue | null;
+  streetAddress2: FormDataEntryValue | null;
 };
 
 export const getFormData = async (request: Request) => {
@@ -52,12 +52,12 @@ export const getFormData = async (request: Request) => {
   const engaged = formData.get("engaged");
   const profession = formData.get("profession");
 
-  // const cep = formData.get("cep");
-  // const city = formData.get("city");
-  // const neighborhood = formData.get("neighborhood");
-  // const province = formData.get("province");
-  // const streetAddress = formData.get("streetAddress");
-  // const streetAddress2 = formData.get("streetAddress2");
+  const cep = formData.get("cep");
+  const city = formData.get("city");
+  const neighborhood = formData.get("neighborhood");
+  const province = formData.get("province");
+  const streetAddress = formData.get("streetAddress");
+  const streetAddress2 = formData.get("streetAddress2");
 
   return {
     name,
@@ -70,12 +70,12 @@ export const getFormData = async (request: Request) => {
     professionalContact,
     engaged,
     profession,
-    // cep,
-    // city,
-    // neighborhood,
-    // province,
-    // streetAddress,
-    // streetAddress2,
+    cep,
+    city,
+    neighborhood,
+    province,
+    streetAddress,
+    streetAddress2,
   };
 };
 
@@ -90,13 +90,13 @@ export const validateRegisterForm = async ({
   professionalContact,
   engaged,
   profession,
-}: // cep,
-// city,
-// neighborhood,
-// province,
-// streetAddress,
-// streetAddress2,
-Form) => {
+  cep,
+  city,
+  neighborhood,
+  province,
+  streetAddress,
+  streetAddress2,
+}: Form) => {
   let errors: Errors = {
     name: null,
     cpf: null,
@@ -108,12 +108,12 @@ Form) => {
     professionalContact: null,
     engaged: null,
     profession: null,
-    // cep: null,
-    // city: null,
-    // neighborhood: null,
-    // province: null,
-    // streetAddress: null,
-    // streetAddress2: null,
+    cep: null,
+    city: null,
+    neighborhood: null,
+    province: null,
+    streetAddress: null,
+    streetAddress2: null,
   };
 
   if (!validateText(name)) {
@@ -166,35 +166,35 @@ Form) => {
     return { errors, data: null };
   }
 
-  // if (!validateText(cep)) {
-  //   errors.cep = "cep is invalid";
-  //   return { errors, data: null };
-  // }
+  if (!validateText(cep)) {
+    errors.cep = "cep is invalid";
+    return { errors, data: null };
+  }
 
-  // if (!validateText(city)) {
-  //   errors.city = "city is invalid";
-  //   return { errors, data: null };
-  // }
+  if (!validateText(city)) {
+    errors.city = "city is invalid";
+    return { errors, data: null };
+  }
 
-  // if (!validateText(neighborhood)) {
-  //   errors.neighborhood = "neighborhood is invalid";
-  //   return { errors, data: null };
-  // }
+  if (!validateText(neighborhood)) {
+    errors.neighborhood = "neighborhood is invalid";
+    return { errors, data: null };
+  }
 
-  // if (!validateText(province)) {
-  //   errors.province = "province is invalid";
-  //   return { errors, data: null };
-  // }
+  if (!validateText(province)) {
+    errors.province = "province is invalid";
+    return { errors, data: null };
+  }
 
-  // if (!validateText(streetAddress)) {
-  //   errors.streetAddress = "streetAddress is invalid";
-  //   return { errors, data: null };
-  // }
+  if (!validateText(streetAddress)) {
+    errors.streetAddress = "streetAddress is invalid";
+    return { errors, data: null };
+  }
 
-  // if (!validateText(streetAddress2)) {
-  //   errors.streetAddress2 = "streetAddress2 is invalid";
-  //   return { errors, data: null };
-  // }
+  if (!validateText(streetAddress2)) {
+    errors.streetAddress2 = "streetAddress2 is invalid";
+    return { errors, data: null };
+  }
 
   return {
     errors,
@@ -209,12 +209,12 @@ Form) => {
       professionalContact,
       engaged,
       profession,
-      // cep,
-      // city,
-      // neighborhood,
-      // province,
-      // streetAddress,
-      // streetAddress2,
+      cep,
+      city,
+      neighborhood,
+      province,
+      streetAddress,
+      streetAddress2,
     },
   };
 };
