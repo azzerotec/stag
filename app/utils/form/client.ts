@@ -1,4 +1,4 @@
-import { validateText } from "~/utils";
+import { validateProvince, validateText } from "~/utils";
 
 type Errors = {
   name: string | null;
@@ -181,7 +181,7 @@ export const validateRegisterForm = async ({
     return { errors, data: null };
   }
 
-  if (!validateText(province)) {
+  if (!validateProvince(province)) {
     errors.province = "province is invalid";
     return { errors, data: null };
   }

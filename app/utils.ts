@@ -70,6 +70,10 @@ export function validateText(text: unknown): text is string {
   return typeof text === "string" && text.length > 3;
 }
 
+export function validateProvince(text: unknown): text is string {
+  return typeof text === "string" && text.length >= 2;
+}
+
 export function validateEmail(email: unknown): email is string {
   return validateText(email) && email.includes("@");
 }

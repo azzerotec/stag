@@ -108,40 +108,40 @@ export default function NewClient() {
               label="Nome Completo"
               className="mt-6"
               name="name"
-              value={client?.name}
+              defaultValue={client?.name}
             />
             <Linha className="gap-x-6">
               <TextInput
                 label="CPF"
                 className="mt-6"
                 name="cpf"
-                value={client?.cpf}
+                defaultValue={client?.cpf}
               />
 
               <TextInput
                 label="RG "
                 className="mt-6"
                 name="rg"
-                value={client?.rg}
+                defaultValue={client?.rg}
               />
               <TextInput
                 label="Data de nascimento"
                 className="mt-6"
                 name="birthdate"
-                value={client?.birthdate}
+                defaultValue={client?.birthdate}
               />
               <TextInput
                 label="Naturalidade"
                 className="mt-6"
                 name="nationality"
-                value={client?.nationality}
+                defaultValue={client?.nationality}
               />
             </Linha>
             <TextInput
               label="Email"
               className="mt-6"
               name="email"
-              value={client?.email}
+              defaultValue={client?.email}
             />
 
             <Linha className="gap-x-6">
@@ -149,26 +149,26 @@ export default function NewClient() {
                 label="Contato(Pessoal)"
                 className="mt-6"
                 name="personalContact"
-                value={client?.personalContact}
+                defaultValue={client?.personalContact}
               />
               <TextInput
                 label="Contato(Profissional)"
                 className="mt-6"
                 name="professionalContact"
-                value={client?.professionalContact}
+                defaultValue={client?.professionalContact}
               />
               <TextInput
                 label="Estado Civil"
                 className="mt-6"
                 name="engaged"
-                value={client?.engaged}
+                defaultValue={client?.engaged}
               />
             </Linha>
             <TextInput
               label="Profissão"
               className="mt-6"
               name="profession"
-              value={client?.profession}
+              defaultValue={client?.profession}
             />
           </div>
         </Linha>
@@ -183,17 +183,43 @@ export default function NewClient() {
 
           <div className="ml-20">
             <Linha className="gap-x-6">
-              <TextInput label="CEP" name="cep" className="mt-6" />
-              <TextInput label="Cidade" name="city" className="mt-6" />
-              <TextInput label="Bairro" name="neighborhood" className="mt-6" />
+              <TextInput
+                label="CEP"
+                name="cep"
+                className="mt-6"
+                defaultValue={client?.cep ?? ""}
+              />
+              <TextInput
+                label="Cidade"
+                name="city"
+                className="mt-6"
+                defaultValue={client?.city ?? ""}
+              />
+              <TextInput
+                label="Bairro"
+                name="neighborhood"
+                className="mt-6"
+                defaultValue={client?.neighborhood ?? ""}
+              />
             </Linha>
-            <TextInput label="Logradouro" name="province" className="mt-6" />
+            <TextInput
+              label="Logradouro"
+              name="streetAddress"
+              className="mt-6"
+              defaultValue={client?.streetAddress ?? ""}
+            />
             <Linha className="gap-x-6">
-              <TextInput label="Estado" name="streetAddress" className="mt-6" />
+              <TextInput
+                label="Estado"
+                name="province"
+                className="mt-6"
+                defaultValue={client?.province ?? ""}
+              />
               <TextInput
                 label="Complemento"
                 name="streetAddress2"
                 className="mt-6"
+                defaultValue={client?.streetAddress2 ?? ""}
               />
             </Linha>
           </div>
