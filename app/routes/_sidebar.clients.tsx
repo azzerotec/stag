@@ -6,11 +6,11 @@ import { TextInput } from "~/components/TextInput";
 import { Linha } from "~/components/layout/Flex";
 import { Container } from "~/components/layout/Container";
 import { Search } from "~/images/icons/Search";
-import { getClients } from "~/models/client.server";
 import { getProcesses } from "~/models/process.server";
+import { getSummarizedClients } from "~/models/client.server";
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const clients = await getClients();
+  const clients = await getSummarizedClients();
   const processes = getProcesses();
   //const userId = await getUserId(request);
   //if (userId) return redirect("/");
@@ -18,7 +18,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 
 export default function ListClients() {
-  const { clients: ClientsList } = useLoaderData<typeof loader>();
+  const { clients } = useLoaderData<typeof loader>();
 
   return (
     <Container>
@@ -38,7 +38,7 @@ export default function ListClients() {
           <TextInput placeholder="Search" icon={Search} className="grow" />
         </Linha>
       </Linha>
-      <ClientTable clients={ClientsList} />
+      <ClientTable clients={clients} />
     </Container>
   );
 }

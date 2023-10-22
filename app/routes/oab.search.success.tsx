@@ -6,11 +6,11 @@ import { ClientTable } from "~/components/ClientTable";
 import { ProcessesTable } from "~/components/ProcessesTable";
 import { Coluna, Linha } from "~/components/layout/Flex";
 import { LogoStag } from "~/images/icons/LogoStag";
-import { getClients } from "~/models/client.server";
+import { getSummarizedClients } from "~/models/client.server";
 import { getProcesses } from "~/models/process.server";
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const clients = await getClients();
+  const clients = await getSummarizedClients();
   const processes = getProcesses();
   //const userId = await getUserId(request);
   //if (userId) return redirect("/");
@@ -18,7 +18,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 
 export default function FoundProcesses() {
-  const { clients: ClientsList } = useLoaderData<typeof loader>();
+  const { clients } = useLoaderData<typeof loader>();
   const { processes: ProcessesList } = useLoaderData<typeof loader>();
   const [asd, setAsd] = useState<string>("processes");
 
@@ -74,7 +74,7 @@ export default function FoundProcesses() {
         {asd === "processes" ? (
           <ProcessesTable processes={ProcessesList} />
         ) : null}
-        {asd === "clients" ? <ClientTable clients={ClientsList} /> : null}
+        {asd === "clients" ? <ClientTable clients={clients} /> : null}
 
         <Linha className=" items-center justify-center pt-9 text-sm font-medium font-inter">
           <button className="h-10 w-72 rounded-md border">

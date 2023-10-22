@@ -1,7 +1,22 @@
-import type { Client } from "@prisma/client";
+import type { Client, Prisma } from "@prisma/client";
 import { prisma } from "~/db.server";
 
 export const getClients = () => prisma.client.findMany();
+
+export const getSummarizedClients = () =>
+  prisma.client.findMany({
+    select: {
+      id: true,
+      name: true,
+      cpf: true,
+      personalContact: true,
+      province: true,
+    },
+  });
+
+export type SummarizedClient = Prisma.PromiseReturnType<
+  typeof getSummarizedClients
+>[number];
 
 export const getClient = (id: Client["id"]) =>
   prisma.client.findUnique({

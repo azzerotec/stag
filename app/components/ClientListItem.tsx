@@ -1,13 +1,13 @@
-import type { Client } from "@prisma/client";
 import { Linha } from "./layout/Flex";
 import {
   ArchiveBoxArrowDownIcon,
   InformationCircleIcon,
   PencilIcon,
 } from "@heroicons/react/24/outline";
+import type { SummarizedClient } from "~/models/client.server";
 
 type Props = {
-  client: Client;
+  client: SummarizedClient;
 };
 
 export const ClientTableItem = ({
